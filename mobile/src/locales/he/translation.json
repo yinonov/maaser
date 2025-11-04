@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "טוען...",
+    "error": "שגיאה",
+    "retry": "נסה שוב",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "save": "שמור",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "back": "חזור",
+    "next": "הבא",
+    "done": "סיום"
+  },
+  "auth": {
+    "welcome": "ברוכים הבאים להמעשר",
+    "signUp": "הרשמה",
+    "login": "התחברות",
+    "logout": "התנתקות",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "fullName": "שם מלא",
+    "forgotPassword": "שכחת סיסמה?",
+    "verifyEmail": "אמת אימייל",
+    "resendVerification": "שלח מייל אימות מחדש"
+  },
+  "feed": {
+    "title": "סיפורים",
+    "search": "חפש סיפורים",
+    "pullToRefresh": "משוך לרענון",
+    "donate": "תרום"
+  },
+  "story": {
+    "donateNow": "תרום עכשיו",
+    "raised": "נאסף",
+    "goal": "יעד",
+    "donors": "תורמים",
+    "verified": "עמותה מאומתת"
+  },
+  "donation": {
+    "amount": "סכום",
+    "message": "הודעה (אופציונלי)",
+    "anonymous": "תרום באנונימיות",
+    "platformFee": "עמלת פלטפורמה",
+    "toNGO": "לעמותה",
+    "total": "סה\"כ",
+    "completeDonation": "השלם תרומה",
+    "success": "התרומה בוצעה בהצלחה!",
+    "viewReceipt": "הצג קבלה",
+    "backToStories": "חזור לסיפורים"
+  },
+  "profile": {
+    "myDonations": "התרומות שלי",
+    "settings": "הגדרות",
+    "language": "שפה",
+    "currency": "מטבע"
+  }
+}

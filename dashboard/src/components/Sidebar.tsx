@@ -1,0 +1,62 @@
+// Sidebar navigation for NGO admin dashboard
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+const navItems: NavItem[] = [
+  { label: 'Dashboard', href: '/', icon: '📊' },
+  { label: 'Stories', href: '/stories', icon: '📖' },
+  { label: 'Donations', href: '/donations', icon: '💰' },
+  { label: 'Settings', href: '/settings', icon: '⚙️' },
+];
+
+export default function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen">
+      <div className="p-6">
+        <h1 className="text-2xl font-bold text-primary">HaMaaser</h1>
+        <p className="text-sm text-gray-600">NGO Admin</p>
+      </div>
+      
+      <nav className="mt-6">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`
+                flex items-center px-6 py-3 text-sm font-medium
+                transition-colors duration-150 ease-in-out
+                ${isActive 
+                  ? 'bg-primary-light text-primary border-r-4 border-primary' 
+                  : 'text-gray-700 hover:bg-gray-50'
+                }
+              `}
+            >
+              <span className="mr-3 text-xl">{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="absolute bottom-0 w-64 p-6 border-t border-gray-200">
+        <button
+          className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
+    </aside>
+  );
+}

@@ -1,8 +1,36 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+import cors from 'cors';
+
+// Initialize Firebase Admin SDK
+admin.initializeApp();
+
+// Configure CORS to allow requests from mobile app and dashboard
+const corsHandler = cors({
+  origin: [
+    'http://localhost:3000', // Dashboard dev
+    'http://localhost:19006', // Expo web dev
+    'https://hamaaser-dashboard.web.app', // Production dashboard
+    'https://hamaaser-dashboard.firebaseapp.com', // Alternative production URL
+  ],
+  credentials: true,
+});
+
+// Helper to wrap Cloud Functions with CORS
+export const withCors = (handler: functions.https.RequestHandler): functions.https.RequestHandler => {
+  return (req, res) => {
+    return corsHandler(req, res, () => handler(req, res));
+  };
+};
+
+// Export Firestore and Storage instances for use in other functions
+export const db = admin.firestore();
+export const storage = admin.storage();
+export const auth = admin.auth();
 
 // Placeholder Cloud Functions
-// Will be implemented in Phase 2 and beyond
+// Will be implemented in Phase 3 and beyond
 
-export const helloWorld = functions.https.onRequest((request, response) => {
-  response.json({ message: 'HaMaaser Cloud Functions - Coming Soon' });
-});
+export const helloWorld = functions.https.onRequest(withCors((request, response) => {
+  response.json({ message: 'HaMaaser Cloud Functions - Ready' });
+}));
