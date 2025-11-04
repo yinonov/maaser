@@ -589,6 +589,7 @@ exports.onNGOUpdate = functions.firestore
 5. **Admin Actions** → `audit_log` table
 
 **JSON Fields** (for nested objects):
+
 - `User.businessInfo` → JSONB column
 - `NGO.stats` → JSONB column or separate `ngo_stats` table
 
@@ -599,6 +600,7 @@ exports.onNGOUpdate = functions.firestore
 **Collections**: 5 main collections (users, ngos, stories, donations, admin_actions)
 
 **Total Documents** (MVP target):
+
 - Users: ~1,000
 - NGOs: ~20
 - Stories: ~100
