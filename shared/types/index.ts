@@ -32,24 +32,24 @@ export interface User {
   email: string;
   displayName: string;
   phoneNumber?: string;
-  
+
   // Role
   profileType: ProfileType;
   ngoIds?: string[];
-  
+
   // Timestamps
   createdAt: Timestamp;
   updatedAt: Timestamp;
   lastLoginAt?: Timestamp;
-  
+
   // Business Info
   businessInfo?: BusinessInfo;
-  
+
   // Preferences
   preferredCurrency: Currency;
   language: Language;
   emailNotifications: boolean;
-  
+
   // Statistics
   donationStats?: DonationStats;
 }
@@ -73,32 +73,32 @@ export interface NGO {
   name: string;
   nameHe: string;
   slug: string;
-  
+
   // Description
   description: string;
   descriptionHe: string;
   mission?: string;
-  
+
   // Media
   logo: string;
   coverImage?: string;
   website?: string;
-  
+
   // Legal
   taxExemptNumber: string;
   verified: boolean;
-  
+
   // Contact
   email: string;
   phoneNumber: string;
   address?: string;
-  
+
   // Admin Access
   adminUsers: string[];
-  
+
   // Statistics
   stats: NGOStats;
-  
+
   // Metadata
   createdAt: Timestamp;
   updatedAt: Timestamp;
@@ -109,19 +109,19 @@ export interface NGO {
 // Story Types
 // ============================================================================
 
-export type StoryStatus = 
-  | 'draft' 
-  | 'pending_approval' 
-  | 'active' 
-  | 'paused' 
-  | 'completed' 
+export type StoryStatus =
+  | 'draft'
+  | 'pending_approval'
+  | 'active'
+  | 'paused'
+  | 'completed'
   | 'archived';
 
 export interface Story {
   // Identity
   id: string;
   ngoId: string;
-  
+
   // Content (Bilingual)
   title: string;
   titleHe: string;
@@ -129,39 +129,39 @@ export interface Story {
   shortDescriptionHe: string;
   description: string;
   descriptionHe: string;
-  
+
   // Media
   images: string[];
   thumbnailImage: string;
   heroImage: string;
   videoUrl?: string;
-  
+
   // Fundraising
   goalAmount?: number;
   raisedAmount: number;
   donationCount: number;
-  
+
   // Publishing
   status: StoryStatus;
   publishedAt?: Timestamp;
   approvedAt?: Timestamp;
   approvedBy?: string;
-  
+
   // Metadata
   createdAt: Timestamp;
   updatedAt: Timestamp;
   createdBy: string;
-  
+
   // Categorization
   tags: string[];
   category?: string;
-  
+
   // Denormalized
   ngoName: string;
   ngoNameHe: string;
   ngoLogo: string;
   ngoVerified: boolean;
-  
+
   // Analytics
   viewCount?: number;
   shareCount?: number;
@@ -171,12 +171,7 @@ export interface Story {
 // Donation Types
 // ============================================================================
 
-export type StripePaymentStatus = 
-  | 'pending' 
-  | 'succeeded' 
-  | 'failed' 
-  | 'refunded' 
-  | 'canceled';
+export type StripePaymentStatus = 'pending' | 'succeeded' | 'failed' | 'refunded' | 'canceled';
 
 export type DonationSource = 'mobile' | 'web';
 
@@ -184,39 +179,39 @@ export interface Donation {
   // Identity
   id: string;
   receiptNumber: string;
-  
+
   // References
   userId: string;
   storyId: string;
   ngoId: string;
-  
+
   // Payment Details
   amount: number;
   currency: Currency;
   platformFee: number;
   ngoAmount: number;
-  
+
   // Stripe Integration
   stripePaymentIntentId: string;
   stripePaymentStatus: StripePaymentStatus;
   stripePaymentMethod: string;
   stripeCustomerId?: string;
-  
+
   // Receipt
   receiptUrl?: string;
   receiptGenerated: boolean;
   receiptSent: boolean;
   receiptSentAt?: Timestamp;
-  
+
   // User Preferences
   anonymous: boolean;
   message?: string;
-  
+
   // Timestamps
   createdAt: Timestamp;
   paidAt?: Timestamp;
   refundedAt?: Timestamp;
-  
+
   // Denormalized
   donorName: string;
   donorEmail: string;
@@ -224,7 +219,7 @@ export interface Donation {
   storyTitleHe: string;
   ngoName: string;
   ngoNameHe: string;
-  
+
   // Analytics
   source?: DonationSource;
   campaignId?: string;
@@ -234,11 +229,11 @@ export interface Donation {
 // Admin Action Types
 // ============================================================================
 
-export type AdminActionType = 
-  | 'approve_story' 
-  | 'reject_story' 
-  | 'suspend_ngo' 
-  | 'verify_ngo' 
+export type AdminActionType =
+  | 'approve_story'
+  | 'reject_story'
+  | 'suspend_ngo'
+  | 'verify_ngo'
   | 'refund_donation';
 
 export type ResourceType = 'story' | 'ngo' | 'user' | 'donation';
@@ -313,4 +308,3 @@ export interface UpdateUserProfileInput {
   language?: Language;
   emailNotifications?: boolean;
 }
-

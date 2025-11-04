@@ -1,6 +1,7 @@
 # Assets Directory
 
 Placeholder for:
+
 - icon.png
 - splash.png  
 - adaptive-icon.png

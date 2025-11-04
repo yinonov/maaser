@@ -48,6 +48,7 @@ hamaaser/
 ### Installation
 
 1. **Clone and install dependencies**:
+
    ```bash
    git clone https://github.com/yinonov/maaser.git
    cd maaser
@@ -55,6 +56,7 @@ hamaaser/
    ```
 
 2. **Configure environment variables**:
+
    ```bash
    # Mobile app
    cp mobile/.env.example mobile/.env
@@ -70,6 +72,7 @@ hamaaser/
    ```
 
 3. **Start development**:
+
    ```bash
    # Mobile app (in terminal 1)
    npm run mobile
@@ -134,6 +137,7 @@ npm run deploy      # Deploy to Firebase
 ## 📊 Development Status
 
 ### Phase 1: Setup ✅ (Complete)
+
 - [x] Monorepo structure
 - [x] Mobile app scaffold
 - [x] Dashboard scaffold
@@ -142,6 +146,7 @@ npm run deploy      # Deploy to Firebase
 - [x] Environment templates
 
 ### Phase 2: Foundational (Next)
+
 - [ ] Firebase project creation
 - [ ] Firestore security rules
 - [ ] Shared TypeScript types
@@ -150,6 +155,7 @@ npm run deploy      # Deploy to Firebase
 - [ ] Cloud Functions foundation
 
 ### Phase 3: User Story 1 - MVP Core (Target)
+
 - [ ] Authentication screens
 - [ ] Story feed & detail
 - [ ] Donation flow
@@ -214,10 +220,10 @@ MIT License - See LICENSE file
 
 ## 🔗 Resources
 
-- **Firebase Console**: https://console.firebase.google.com
-- **Stripe Dashboard**: https://dashboard.stripe.com
-- **Expo Documentation**: https://docs.expo.dev
-- **Next.js Documentation**: https://nextjs.org/docs
+- **Firebase Console**: <https://console.firebase.google.com>
+- **Stripe Dashboard**: <https://dashboard.stripe.com>
+- **Expo Documentation**: <https://docs.expo.dev>
+- **Next.js Documentation**: <https://nextjs.org/docs>
 
 ---
 

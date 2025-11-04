@@ -22,10 +22,10 @@ export const authOptions: NextAuthOptions = {
         try {
           // Verify Firebase ID token (client will sign in first and send token)
           const decodedToken = await adminAuth.verifyIdToken(credentials.password);
-          
+
           // Get user from Firestore
           const userDoc = await adminDb.collection('users').doc(decodedToken.uid).get();
-          
+
           if (!userDoc.exists) {
             throw new Error('User not found');
           }
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
         try {
           // Check if user exists in Firestore
           const userDoc = await adminDb.collection('users').doc(user.id).get();
-          
+
           if (!userDoc.exists) {
             // New user - check if they should be NGO admin
             // For MVP, reject new Google sign-ins (require email/password registration first)
@@ -75,7 +75,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           const userData = userDoc.data();
-          
+
           // Only allow NGO admins
           if (userData?.profileType !== 'ngo_admin') {
             return false;
