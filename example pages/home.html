@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>המעשר - Donation Feed</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#eebd2b",
+              "background-light": "#f8f7f6",
+              "background-dark": "#221d10",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      body {
+        @apply bg-background-light dark:bg-background-dark font-display text-[#333333] dark:text-gray-200;
+      }
+      .custom-card {
+        @apply bg-white dark:bg-background-dark dark:border dark:border-gray-800;
+      }
+      .btn-primary {
+        @apply bg-primary text-[#181611];
+      }
+      .text-subtle {
+        @apply text-[#897f61] dark:text-gray-400;
+      }
+      .text-main {
+        @apply text-[#181611] dark:text-gray-100;
+      }
+      .border-custom {
+        @apply border-[#f4f3f0] dark:border-gray-700;
+      }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark">
+    <div
+      class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden"
+      style="font-family: 'Plus Jakarta Sans', 'Noto Sans', sans-serif"
+    >
+      <header
+        class="sticky top-0 z-50 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-solid border-custom"
+      >
+        <div
+          class="flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3 max-w-6xl mx-auto"
+        >
+          <div class="flex items-center gap-4 text-main">
+            <div class="size-6 text-primary">
+              <svg
+                fill="none"
+                viewbox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2
+              class="text-main text-xl font-bold leading-tight tracking-[-0.015em]"
+            >
+              המעשר
+            </h2>
+          </div>
+          <div class="hidden md:flex flex-1 justify-center items-center gap-9">
+            <a class="text-main text-sm font-medium leading-normal" href="#"
+              >Home</a
+            >
+            <a
+              class="text-subtle text-sm font-medium leading-normal hover:text-main"
+              href="#"
+              >My Donations</a
+            >
+            <a
+              class="text-subtle text-sm font-medium leading-normal hover:text-main"
+              href="#"
+              >Profile</a
+            >
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-primary text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Donate</span>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              data-alt="User profile picture"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBp84nRB9x7TjX5SgsOeDaPFXnBAe1ET42yF6ej_PQaR3ECCdEaQlf8POPwFcMv_psVFnR88p4JajVTDKBSDD07boQd7-ArwTlAzMlaCE30e8g4ujRvcdgYb6RaoyJESnBtL2uqP6mkjGh08gdvSY4zTGZueQkBwHvJxVksoZDWXTnnqJg70Lgj_6pwhPUQPcTSYDlI72-Febtmb_i1IBbGj7pky0cSvxZOWyfxSXVP7yNiqYtojLbz2h-LsosCxsbfSeQtHOq0WlI');
+              "
+            ></div>
+          </div>
+        </div>
+      </header>
+      <main class="flex w-full flex-1 justify-center py-8 px-4">
+        <div class="flex max-w-[600px] flex-1 flex-col gap-8">
+          <!-- Story Card 1 -->
+          <div
+            class="flex flex-col rounded-xl overflow-hidden shadow-sm custom-card"
+          >
+            <div
+              class="flex items-center gap-3 p-4 border-b border-solid border-custom"
+            >
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                data-alt="Family photo of the Cohens"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGzMK-qYBg--q5ArBG6_Qam78DyHG3fTl1RbbWlRyN3CAnTMsvOYoWmrkBerumUSjWHES32cvcvMmBPQjK_en5BsCe6U6HUw9ftxhEXx8w1kBrZXhAfXBIjBwBBfTuE11S0sZ-2mFPDNJa1SPMHkZ0RAWvZF1LUlruVbumz4yAnjvFVPrA_WGQ_puTBXo2tdgosHdE-pPLRXd8Z3Wkicb8wltjPvFSSZ4vbwhr6XwSynnlWT-2b1QamhnaK-eBfHSVba6sOAC0AZQ');
+                "
+              ></div>
+              <p class="text-main text-sm font-medium leading-normal">
+                Mishpachat Cohen
+              </p>
+            </div>
+            <div
+              class="w-full bg-center bg-no-repeat aspect-video bg-cover"
+              data-alt="A modest home's living room with a focus on a small heater"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCjBBnjiwmIGjDdjZcr0yLAsOi2n1aLqjgx3bcOZIlqMfVNXxgJxshR0ZJA18hagBqYowFoWlTmo68ckWT-Ge3Hahs_c-lfc9Sc-vM4wwl0JCeN0DknQBK2RHrT9Mph7kHbAwcA2el-NRpcMHg3R8aaBs5vXAkk1RfNpulAADNyl_eyQEQHvRTQG7T4vhMRujTQ6XfinybLRuOnaoTQRt0EIrNQXs4c5oEOgTET4OkTLj4yxIrpwufhI5F0bVXJ-JJceMU__GXywCc');
+              "
+            ></div>
+            <div class="flex flex-col gap-4 p-4">
+              <p
+                class="text-main text-lg font-bold leading-tight tracking-[-0.015em]"
+              >
+                Help us get a warm winter
+              </p>
+              <p class="text-subtle text-base font-normal leading-normal">
+                With the cold season approaching, we're struggling to afford
+                proper heating and warm clothing for our children. Your help can
+                make a huge difference.
+                <a class="font-medium text-main/80 hover:underline" href="#"
+                  >read more</a
+                >
+              </p>
+              <div class="flex flex-col gap-3">
+                <div class="flex gap-6 justify-between items-center">
+                  <p class="text-main text-base font-medium leading-normal">
+                    ₪1,200 of ₪5,000 raised
+                  </p>
+                  <p class="text-subtle text-sm font-normal leading-normal">
+                    24%
+                  </p>
+                </div>
+                <div
+                  class="w-full rounded-full bg-gray-200 dark:bg-gray-700 h-2"
+                >
+                  <div
+                    class="h-2 rounded-full bg-primary"
+                    style="width: 24%"
+                  ></div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-4 mt-2">
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center justify-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-subtle"
+                      style="font-size: 20px"
+                      >volunteer_activism</span
+                    >
+                    <p
+                      class="text-subtle text-[13px] font-bold leading-normal tracking-[0.015em]"
+                    >
+                      15 Donors
+                    </p>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <span
+                      class="material-symbols-outlined text-subtle"
+                      style="font-size: 20px"
+                      >share</span
+                    >
+                    <p
+                      class="text-subtle text-[13px] font-bold leading-normal tracking-[0.015em]"
+                    >
+                      Share
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 btn-primary text-sm font-bold leading-normal"
+                >
+                  <span class="truncate">Help This Family</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Story Card 2 -->
+          <div
+            class="flex flex-col rounded-xl overflow-hidden shadow-sm custom-card"
+          >
+            <div
+              class="flex items-center gap-3 p-4 border-b border-solid border-custom"
+            >
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                data-alt="Logo for Ezra L'Aniyim charity"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBt3mI_d7mGx1NSAREcrvXJnf_amm-4ajOUlIVKmVQXJIuN9DMYnKry9qYV0tmzTjv2BeAXhj18hENK6hY7CEfZIq_ZRmglx9DCb3MkORcBjV1y2leqh3DZSakPkD22B_6Unt2jNQqQ_R9oYBlu_wmBskzspxhBMAnUvtxloFBqrLNCdeTEGCIGj6JMtkx0lfaJ2MIS52Ju4cYt-e_5vF8N7rcNOsMzBamyqgs3CgAMSl_iVLdaqy4qTLvJjGUvZvdtq_oYYbqjvDs');
+                "
+              ></div>
+              <p class="text-main text-sm font-medium leading-normal">
+                Ezra L'Aniyim
+              </p>
+            </div>
+            <div
+              class="w-full bg-center bg-no-repeat aspect-video bg-cover"
+              data-alt="A family standing together, looking hopefully towards a new beginning"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBjYUM2YEON1Y7VmWl9_syjaFMkWWWnxpfsI_y3WMqkMNHX5_LuC_n879drkjTSFv1JoBnX_TaZaygM7MzMM5M9XgSHKEbr7IDTD5XkutYjnbXYaHn48SdlIdAG_1PAkvcBzwj5KdawfDPDHPzWy2BfYvDum2AX06_UymZiZeKxOMwF5Jqowizqmo2eiEiVqTf5zA7u4VQmE5snAY5QScTWaC58RR27gxc9-wQ2lCVy8xWJkWCYdj-pdFuhb8VY9HzrPBZYHrSQqqI');
+              "
+            ></div>
+            <div class="flex flex-col gap-4 p-4">
+              <p
+                class="text-main text-lg font-bold leading-tight tracking-[-0.015em]"
+              >
+                A new start for the Levi family
+              </p>
+              <p class="text-subtle text-base font-normal leading-normal">
+                The Levi family lost their home in a fire. We are raising funds
+                to help them find a new place to live and rebuild their lives
+                with dignity.
+                <a class="font-medium text-main/80 hover:underline" href="#"
+                  >read more</a
+                >
+              </p>
+              <div class="flex flex-col gap-3">
+                <div class="flex gap-6 justify-between items-center">
+                  <p class="text-main text-base font-medium leading-normal">
+                    ₪18,550 of ₪30,000 raised
+                  </p>
+                  <p class="text-subtle text-sm font-normal leading-normal">
+                    62%
+                  </p>
+                </div>
+                <div
+                  class="w-full rounded-full bg-gray-200 dark:bg-gray-700 h-2"
+                >
+                  <div
+                    class="h-2 rounded-full bg-primary"
+                    style="width: 62%"
+                  ></div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-4 mt-2">
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center justify-center gap-2">
+                    <span
+                      class="material-symbols-outlined text-subtle"
+                      style="font-size: 20px"
+                      >volunteer_activism</span
+                    >
+                    <p
+                      class="text-subtle text-[13px] font-bold leading-normal tracking-[0.015em]"
+                    >
+                      87 Donors
+                    </p>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <span
+                      class="material-symbols-outlined text-subtle"
+                      style="font-size: 20px"
+                      >share</span
+                    >
+                    <p
+                      class="text-subtle text-[13px] font-bold leading-normal tracking-[0.015em]"
+                    >
+                      Share
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 btn-primary text-sm font-bold leading-normal"
+                >
+                  <span class="truncate">Donate Now</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Infinite Scroll Loader -->
+          <div class="flex items-center justify-center py-6">
+            <div
+              class="size-8 border-4 border-gray-200 border-t-primary rounded-full animate-spin"
+            ></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
