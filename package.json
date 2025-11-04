@@ -1,12 +1,28 @@
 {
-  "name": "maaser",
+  "name": "hamaaser-monorepo",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "mobile",
+    "dashboard",
+    "functions",
+    "shared/types"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mobile": "cd mobile && npm start",
+    "mobile:ios": "cd mobile && npm run ios",
+    "mobile:android": "cd mobile && npm run android",
+    "dashboard": "cd dashboard && npm run dev",
+    "dashboard:build": "cd dashboard && npm run build",
+    "dashboard:start": "cd dashboard && npm start",
+    "functions": "cd functions && npm run serve",
+    "functions:deploy": "cd functions && npm run deploy",
+    "functions:build": "cd functions && npm run build",
+    "install:all": "npm install && cd mobile && npm install && cd ../dashboard && npm install && cd ../functions && npm install",
+    "lint": "cd mobile && npm run lint && cd ../dashboard && npm run lint",
+    "test": "echo \"Run tests from individual packages\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "description": "HaMaaser MVP - Digital Tithing Platform (Monorepo)",
+  "author": "HaMaaser Team",
+  "license": "MIT"
 }

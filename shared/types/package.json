@@ -1,0 +1,12 @@
+{
+  "name": "@hamaaser/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript type definitions for HaMaaser platform",
+  "main": "index.ts",
+  "types": "index.ts",
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5.0.0",
+    "firebase": "^10.7.0"
+  }
+}

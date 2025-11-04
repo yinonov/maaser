@@ -31,18 +31,18 @@ hamaaser/
 
 **Purpose**: Project initialization and monorepo structure
 
-- [ ] T001 Create monorepo root structure with mobile/, dashboard/, functions/, firebase/, shared/ directories
-- [ ] T002 Initialize mobile/ with Expo SDK 51+ project: `cd mobile && npx create-expo-app@latest . --template blank-typescript`
-- [ ] T003 [P] Initialize dashboard/ with Next.js 14+: `cd dashboard && npx create-next-app@latest . --typescript --app --use-npm`
-- [ ] T004 [P] Initialize functions/ with Firebase Cloud Functions: `cd functions && firebase init functions` (Node.js 20, TypeScript)
-- [ ] T005 [P] Create shared/types/ directory with package.json for shared TypeScript types
-- [ ] T006 [P] Configure root package.json with workspace scripts (mobile, dashboard, functions commands)
-- [ ] T007 [P] Setup ESLint + Prettier configs in root with React Native and Next.js presets
-- [ ] T008 [P] Create .gitignore with node_modules/, .expo/, .next/, functions/lib/, .env* patterns
-- [ ] T009 Create firebase/firebase.json config file with Firestore, Functions, Storage, Hosting settings
-- [ ] T010 [P] Setup environment variable templates: mobile/.env.example, dashboard/.env.local.example, functions/.env.example
+- [x] T001 Create monorepo root structure with mobile/, dashboard/, functions/, firebase/, shared/ directories
+- [x] T002 Initialize mobile/ with Expo SDK 51+ project: `cd mobile && npx create-expo-app@latest . --template blank-typescript`
+- [x] T003 [P] Initialize dashboard/ with Next.js 14+: `cd dashboard && npx create-next-app@latest . --typescript --app --use-npm`
+- [x] T004 [P] Initialize functions/ with Firebase Cloud Functions: `cd functions && firebase init functions` (Node.js 20, TypeScript)
+- [x] T005 [P] Create shared/types/ directory with package.json for shared TypeScript types
+- [x] T006 [P] Configure root package.json with workspace scripts (mobile, dashboard, functions commands)
+- [x] T007 [P] Setup ESLint + Prettier configs in root with React Native and Next.js presets
+- [x] T008 [P] Create .gitignore with node_modules/, .expo/, .next/, functions/lib/, .env* patterns
+- [x] T009 Create firebase/firebase.json config file with Firestore, Functions, Storage, Hosting settings
+- [x] T010 [P] Setup environment variable templates: mobile/.env.example, dashboard/.env.local.example, functions/.env.example
 
-**Checkpoint**: Project structure initialized - ready for Firebase setup
+**Checkpoint**: ✅ Project structure initialized - ready for Firebase setup
 
 ---
 
@@ -54,31 +54,31 @@ hamaaser/
 
 ### Firebase Setup
 
-- [ ] T011 Create Firebase project via console: hamaaser-dev (development environment)
-- [ ] T012 Enable Firebase Authentication with Email/Password and Google OAuth providers
-- [ ] T013 Enable Firestore Database in us-central1 with test mode initially
-- [ ] T014 Enable Cloud Storage for Firebase in us-central1 with test mode
-- [ ] T015 Deploy Firestore security rules from firebase/firestore.rules per data-model.md
-- [ ] T016 Deploy Firestore indexes from firebase/firestore.indexes.json with compound indexes for stories, donations queries
-- [ ] T017 Deploy Storage security rules from firebase/storage.rules for user/NGO image uploads
+- [x] T011 Create Firebase project via console: hamaaser-dev (development environment)
+- [x] T012 Enable Firebase Authentication with Email/Password and Google OAuth providers
+- [x] T013 Enable Firestore Database in us-central1 with test mode initially
+- [x] T014 Enable Cloud Storage for Firebase in us-central1 with test mode
+- [x] T015 Deploy Firestore security rules from firebase/firestore.rules per data-model.md
+- [x] T016 Deploy Firestore indexes from firebase/firestore.indexes.json with compound indexes for stories, donations queries
+- [x] T017 Deploy Storage security rules from firebase/storage.rules for user/NGO image uploads
 - [ ] T018 Register iOS app bundle in Firebase console and download GoogleService-Info.plist to mobile/ios/
 - [ ] T019 Register Android app package in Firebase console and download google-services.json to mobile/android/app/
-- [ ] T020 Register web app in Firebase console and save config to dashboard/.env.local
+- [x] T020 Register web app in Firebase console and save config to dashboard/.env.local
 
 ### Shared Types
 
-- [ ] T021 [P] Create shared/types/user.ts with User interface matching data-model.md users collection schema
-- [ ] T022 [P] Create shared/types/ngo.ts with NGO interface matching data-model.md ngos collection schema
-- [ ] T023 [P] Create shared/types/story.ts with Story interface matching data-model.md stories collection schema
-- [ ] T024 [P] Create shared/types/donation.ts with Donation interface matching data-model.md donations collection schema
-- [ ] T025 [P] Create shared/types/index.ts exporting all types for easy imports
+- [x] T021 [P] Create shared/types/user.ts with User interface matching data-model.md users collection schema
+- [x] T022 [P] Create shared/types/ngo.ts with NGO interface matching data-model.md ngos collection schema
+- [x] T023 [P] Create shared/types/story.ts with Story interface matching data-model.md stories collection schema
+- [x] T024 [P] Create shared/types/donation.ts with Donation interface matching data-model.md donations collection schema
+- [x] T025 [P] Create shared/types/index.ts exporting all types for easy imports
 
 ### Mobile App Foundation
 
-- [ ] T026 Install core mobile dependencies: `firebase@10.7+, @react-navigation/native@6+, zustand@4+, expo-router@3+`
-- [ ] T027 Configure Firebase in mobile/src/services/firebase.ts with Firestore, Auth, Storage initialization
-- [ ] T028 Create mobile/src/constants/colors.ts with design system colors (#d4a373, #eebd2b, etc.) from design-reference.md
-- [ ] T029 Create mobile/src/constants/config.ts with environment variables (API URLs, Stripe publishable key)
+- [x] T026 Install core mobile dependencies: `firebase@10.7+, @react-navigation/native@6+, zustand@4+, expo-router@3+`
+- [x] T027 Configure Firebase in mobile/src/services/firebase.ts with Firestore, Auth, Storage initialization
+- [x] T028 Create mobile/src/constants/colors.ts with design system colors (#d4a373, #eebd2b, etc.) from design-reference.md
+- [x] T029 Create mobile/src/constants/config.ts with environment variables (API URLs, Stripe publishable key)
 - [ ] T030 Setup i18next in mobile/src/services/i18n.ts with Hebrew/English support and RTL handling
 - [ ] T031 Configure Expo app.json with iOS bundle ID, Android package, splash screen, app icon placeholders
 - [ ] T032 Create mobile/src/navigation/AppNavigator.tsx with React Navigation stack structure (Auth, Main tabs)
@@ -88,10 +88,10 @@ hamaaser/
 
 ### Dashboard Foundation
 
-- [ ] T036 Install core dashboard dependencies: `firebase-admin@11+, next-auth@4+, @stripe/stripe-js@3+`
-- [ ] T037 Configure Firebase Admin SDK in dashboard/src/lib/firebase-admin.ts with service account credentials
-- [ ] T038 Setup NextAuth.js in dashboard/src/app/api/auth/[...nextauth]/route.ts with Firebase Auth provider
-- [ ] T039 Create dashboard layout in dashboard/src/app/(dashboard)/layout.tsx with sidebar navigation
+- [x] T036 Install core dashboard dependencies: `firebase-admin@11+, next-auth@4+, @stripe/stripe-js@3+`
+- [x] T037 Configure Firebase Admin SDK in dashboard/src/lib/firebase-admin.ts with service account credentials
+- [x] T038 Setup NextAuth.js in dashboard/src/app/api/auth/[...nextauth]/route.ts with Firebase Auth provider
+- [x] T039 Create dashboard layout in dashboard/src/app/(dashboard)/layout.tsx with sidebar navigation
 - [ ] T040 Create dashboard/src/components/Sidebar.tsx with NGO admin navigation menu (Stories, Donations, Settings)
 - [ ] T041 Configure Tailwind CSS in dashboard/tailwind.config.ts with design system colors from design-reference.md
 
@@ -191,8 +191,8 @@ hamaaser/
 
 ### Mobile: Testing US1 (Optional - can defer to Phase 7)
 
-- [ ] T102 [P] [US1] Write integration test in mobile/__tests__/auth.test.ts: signup → login → verify email flow
-- [ ] T103 [P] [US1] Write integration test in mobile/__tests__/donation.test.ts: browse stories → select story → donate → receive receipt
+- [ ] T102 [P] [US1] Write integration test in mobile/**tests**/auth.test.ts: signup → login → verify email flow
+- [ ] T103 [P] [US1] Write integration test in mobile/**tests**/donation.test.ts: browse stories → select story → donate → receive receipt
 
 **Checkpoint**: USER STORY 1 COMPLETE - MVP is now functional! Can test end-to-end: signup → browse → donate → receipt
 
@@ -275,7 +275,7 @@ hamaaser/
 
 ### Dashboard: Testing US2 (Optional - can defer to Phase 7)
 
-- [ ] T150 [P] [US2] Write E2E test in dashboard/__tests__/story-management.test.ts: create story → submit → approve (admin) → verify in feed
+- [ ] T150 [P] [US2] Write E2E test in dashboard/**tests**/story-management.test.ts: create story → submit → approve (admin) → verify in feed
 
 **Checkpoint**: USER STORY 2 COMPLETE - NGOs can now manage their own content independently
 
@@ -329,7 +329,7 @@ hamaaser/
 
 ### Mobile: Testing US3 (Optional - can defer to Phase 7)
 
-- [ ] T176 [P] [US3] Write integration test in mobile/__tests__/returning-donor.test.ts: login → view history → donate with saved card → verify <60 sec
+- [ ] T176 [P] [US3] Write integration test in mobile/**tests**/returning-donor.test.ts: login → view history → donate with saved card → verify <60 sec
 
 **Checkpoint**: USER STORY 3 COMPLETE - Returning donors have optimized experience
 
@@ -389,7 +389,7 @@ hamaaser/
 
 ### Mobile: Testing US4 (Optional - can defer to Phase 7)
 
-- [ ] T205 [P] [US4] Write integration test in mobile/__tests__/tax-summary.test.ts: filter by year → generate summary → download PDF → verify data
+- [ ] T205 [P] [US4] Write integration test in mobile/**tests**/tax-summary.test.ts: filter by year → generate summary → download PDF → verify data
 
 **Checkpoint**: USER STORY 4 COMPLETE - Full donation tracking and tax compliance features implemented
 
@@ -441,10 +441,10 @@ hamaaser/
 
 ### Testing (Optional - Deferred Test Tasks)
 
-- [ ] T234 [P] Write unit tests for Zustand stores in mobile/__tests__/stores/ testing auth, story, donation state management
-- [ ] T235 [P] Write unit tests for Cloud Functions in functions/src/__tests__/ testing payment, receipt, story logic with mocked Firestore/Stripe
-- [ ] T236 [P] Write component tests for mobile screens using React Native Testing Library in mobile/__tests__/components/
-- [ ] T237 [P] Write E2E tests for dashboard using Playwright in dashboard/__tests__/e2e/ covering story creation flow
+- [ ] T234 [P] Write unit tests for Zustand stores in mobile/**tests**/stores/ testing auth, story, donation state management
+- [ ] T235 [P] Write unit tests for Cloud Functions in functions/src/**tests**/ testing payment, receipt, story logic with mocked Firestore/Stripe
+- [ ] T236 [P] Write component tests for mobile screens using React Native Testing Library in mobile/**tests**/components/
+- [ ] T237 [P] Write E2E tests for dashboard using Playwright in dashboard/**tests**/e2e/ covering story creation flow
 - [ ] T238 Setup CI/CD pipeline with GitHub Actions running lint + test on PR, deploying on merge to main
 - [ ] T239 Add Stripe test mode validation ensuring all test card numbers work correctly in development
 - [ ] T240 Create test data seeding script in scripts/seed-dev-data.ts creating 5 NGOs, 20 stories, 50 donations for testing
@@ -502,6 +502,7 @@ Setup (Phase 1) → Foundational (Phase 2) → User Story 1 (Phase 3) → SHIP M
 ```
 
 **Timeline Estimate**:
+
 - Phase 1: 2 days
 - Phase 2: 5 days
 - Phase 3 (US1): 10 days
@@ -510,6 +511,7 @@ Setup (Phase 1) → Foundational (Phase 2) → User Story 1 (Phase 3) → SHIP M
 ### Parallel Opportunities
 
 **Phase 2 (Foundational) - Can run in parallel**:
+
 - Firebase setup (T011-T020) - Developer A
 - Shared types (T021-T025) - Developer B
 - Mobile foundation (T026-T035) - Developer A
@@ -517,12 +519,14 @@ Setup (Phase 1) → Foundational (Phase 2) → User Story 1 (Phase 3) → SHIP M
 - Functions foundation (T042-T047) - Developer C
 
 **Phase 3 (User Story 1) - Can parallelize within story**:
+
 - Mobile Auth (T048-T055) - Developer A
 - Mobile Feed (T056-T061) - Developer B
 - Cloud Functions Payment (T081-T092) - Developer C
 Then converge for integration
 
 **Phase 4 vs Phase 3 - Can run stories in parallel**:
+
 - Team A: Finish User Story 1 (mobile donor experience)
 - Team B: Start User Story 2 (dashboard NGO experience)
 - Zero conflicts - different apps, different collections

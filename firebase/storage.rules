@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Cloud Storage Security Rules for HaMaaser MVP
+// Will be implemented in Phase 2 (Task T017)
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Default: Deny all reads and writes
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+    
+    // Placeholder rules - will be replaced with actual rules
+  }
+}
