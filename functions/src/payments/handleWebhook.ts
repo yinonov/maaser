@@ -70,7 +70,7 @@ export const handleStripeWebhook = functions.https.onRequest(async (req, res) =>
 
 async function handlePaymentSucceeded(paymentIntent: any) {
   const paymentIntentId = paymentIntent.id;
-  const metadata = paymentIntent.metadata;
+  // const metadata = paymentIntent.metadata; // Reserved for future use
 
   logInfo('Processing successful payment', { paymentIntentId });
 
@@ -83,7 +83,7 @@ async function handlePaymentSucceeded(paymentIntent: any) {
       .get();
 
     if (donationsSnapshot.empty) {
-      logError('Donation not found for payment intent', { paymentIntentId });
+      logError('Donation not found for payment intent', undefined, { paymentIntentId });
       return;
     }
 
@@ -128,9 +128,8 @@ async function handlePaymentSucceeded(paymentIntent: any) {
     logInfo('Updated NGO stats', { ngoId: donationData.ngoId });
 
     // Log audit trail
-    logAudit('donation_completed', {
+    logAudit('donation_completed', donationData.userId, {
       donationId,
-      userId: donationData.userId,
       amount: donationData.amount,
       storyId: donationData.storyId,
       ngoId: donationData.ngoId,
@@ -169,7 +168,7 @@ async function handlePaymentFailed(paymentIntent: any) {
       .get();
 
     if (donationsSnapshot.empty) {
-      logError('Donation not found for failed payment', { paymentIntentId });
+      logError('Donation not found for failed payment', undefined, { paymentIntentId });
       return;
     }
 

@@ -4,7 +4,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import stripe, { calculatePlatformFee, calculateNGOAmount } from '../utils/stripe';
-import { validateRequest } from '../utils/validation';
 import { handleError } from '../utils/errorHandler';
 import { logInfo, logError } from '../utils/logger';
 
