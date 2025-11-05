@@ -2,15 +2,19 @@
 // Used in Next.js API routes and server components
 
 import { initializeApp, getApps, cert, App } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
-import { getFirestore } from 'firebase-admin/firestore';
-import { getStorage } from 'firebase-admin/storage';
+import { getAuth, Auth } from 'firebase-admin/auth';
+import { getFirestore, Firestore } from 'firebase-admin/firestore';
+import { getStorage, Storage } from 'firebase-admin/storage';
 
-let adminApp: App;
+let adminApp: App | null = null;
 
 function getAdminApp(): App {
   if (getApps().length > 0) {
     return getApps()[0];
+  }
+
+  if (adminApp) {
+    return adminApp;
   }
 
   // Parse service account from environment variable
@@ -39,12 +43,36 @@ function getAdminApp(): App {
   }
 }
 
-// Initialize app
-const app = getAdminApp();
+// Lazy-initialize services
+let _adminAuth: Auth | null = null;
+let _adminDb: Firestore | null = null;
+let _adminStorage: Storage | null = null;
 
-// Export services
-export const adminAuth = getAuth(app);
-export const adminDb = getFirestore(app);
-export const adminStorage = getStorage(app);
+export const adminAuth = new Proxy({} as Auth, {
+  get: (_target, prop) => {
+    if (!_adminAuth) {
+      _adminAuth = getAuth(getAdminApp());
+    }
+    return (_adminAuth as any)[prop];
+  }
+});
 
-export default app;
+export const adminDb = new Proxy({} as Firestore, {
+  get: (_target, prop) => {
+    if (!_adminDb) {
+      _adminDb = getFirestore(getAdminApp());
+    }
+    return (_adminDb as any)[prop];
+  }
+});
+
+export const adminStorage = new Proxy({} as Storage, {
+  get: (_target, prop) => {
+    if (!_adminStorage) {
+      _adminStorage = getStorage(getAdminApp());
+    }
+    return (_adminStorage as any)[prop];
+  }
+});
+
+export default getAdminApp;
