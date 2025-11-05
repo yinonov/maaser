@@ -3,32 +3,44 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 interface NavItem {
   label: string;
   href: string;
   icon: string;
+  adminOnly?: boolean;
 }
 
 const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/', icon: '📊' },
   { label: 'Stories', href: '/stories', icon: '📖' },
   { label: 'Donations', href: '/donations', icon: '💰' },
+  { label: 'Approve Stories', href: '/admin/approve', icon: '✅', adminOnly: true },
   { label: 'Settings', href: '/settings', icon: '⚙️' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const isPlatformAdmin = (session?.user as any)?.profileType === 'platform_admin';
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 min-h-screen">
       <div className="p-6">
         <h1 className="text-2xl font-bold text-primary">HaMaaser</h1>
-        <p className="text-sm text-gray-600">NGO Admin</p>
+        <p className="text-sm text-gray-600">
+          {isPlatformAdmin ? 'Platform Admin' : 'NGO Admin'}
+        </p>
       </div>
       
       <nav className="mt-6">
         {navItems.map((item) => {
+          // Skip admin-only items if not admin
+          if (item.adminOnly && !isPlatformAdmin) {
+            return null;
+          }
+
           const isActive = pathname === item.href;
           return (
             <Link

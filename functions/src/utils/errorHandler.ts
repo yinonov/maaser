@@ -86,3 +86,40 @@ export const successResponse = <T>(data: T, res: Response, statusCode: number = 
     data,
   });
 };
+
+// Error response for callable functions (onCall)
+export const handleCallableError = (error: any): { success: false; error: any } => {
+  console.error('Callable function error:', error);
+
+  // Handle Firebase HttpsError (already properly formatted)
+  if (error.code && error.message) {
+    return {
+      success: false,
+      error: {
+        code: error.code,
+        message: error.message,
+      },
+    };
+  }
+
+  // Handle custom API errors
+  if (error instanceof ApiError) {
+    return {
+      success: false,
+      error: {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+      },
+    };
+  }
+
+  // Handle unknown errors
+  return {
+    success: false,
+    error: {
+      code: ErrorCodes.INTERNAL_ERROR,
+      message: error.message || 'An unexpected error occurred',
+    },
+  };
+};
