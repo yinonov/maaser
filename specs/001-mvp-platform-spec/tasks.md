@@ -215,63 +215,63 @@ hamaaser/
 
 ### Dashboard: Story List (US2)
 
-- [ ] T108 [P] [US2] Create dashboard/src/app/(dashboard)/stories/page.tsx with table listing NGO's stories (title, status, raised amount, date)
-- [ ] T109 [US2] Fetch NGO stories in stories/page.tsx querying Firestore: WHERE ngoId == currentUser.ngoIds[0] ORDER BY createdAt DESC
-- [ ] T110 [US2] Add status filter dropdown in stories/page.tsx filtering by draft, pending_approval, active, paused, archived
-- [ ] T111 [US2] Add "Create New Story" button in stories/page.tsx navigating to /stories/new
-- [ ] T112 [US2] Display story stats in table: viewCount, donationCount, raisedAmount / goalAmount percentage
+- [x] T108 [P] [US2] Create dashboard/src/app/(dashboard)/stories/page.tsx with table listing NGO's stories (title, status, raised amount, date)
+- [x] T109 [US2] Fetch NGO stories in stories/page.tsx querying Firestore: WHERE ngoId == currentUser.ngoIds[0] ORDER BY createdAt DESC
+- [x] T110 [US2] Add status filter dropdown in stories/page.tsx filtering by draft, pending_approval, active, paused, archived
+- [x] T111 [US2] Add "Create New Story" button in stories/page.tsx navigating to /stories/new
+- [x] T112 [US2] Display story stats in table: viewCount, donationCount, raisedAmount / goalAmount percentage
 
 ### Dashboard: Create Story (US2)
 
-- [ ] T113 [P] [US2] Create dashboard/src/app/(dashboard)/stories/new/page.tsx with story creation form per business-payment-setup.html structure
-- [ ] T114 [P] [US2] Create dashboard/src/components/StoryForm.tsx reusable form component with bilingual fields (title, titleHe, description, descriptionHe)
-- [ ] T115 [US2] Add image upload widget in StoryForm using Firebase Storage upload with resize to 800x800 and 300x300 thumbnails
-- [ ] T116 [US2] Implement multi-image upload in StoryForm allowing max 5 images with preview and delete functionality
-- [ ] T117 [US2] Add rich text editor in StoryForm for description field supporting bold, italic, lists (using react-quill or similar)
-- [ ] T118 [US2] Add form fields in StoryForm: goalAmount (optional, number input), tags (multi-select), category (dropdown)
-- [ ] T119 [US2] Validate form in StoryForm: title/titleHe required, description 300-5000 chars, min 1 image, max 5 tags
-- [ ] T120 [US2] Submit story in StoryForm calling Cloud Function createStory, setting status: pending_approval, createdBy: currentUser.uid
+- [x] T113 [P] [US2] Create dashboard/src/app/(dashboard)/stories/new/page.tsx with story creation form per business-payment-setup.html structure
+- [x] T114 [P] [US2] Create dashboard/src/components/StoryForm.tsx reusable form component with bilingual fields (title, titleHe, description, descriptionHe)
+- [x] T115 [US2] Add image upload widget in StoryForm using Firebase Storage upload with resize to 800x800 and 300x300 thumbnails
+- [x] T116 [US2] Implement multi-image upload in StoryForm allowing max 5 images with preview and delete functionality
+- [x] T117 [US2] Add rich text editor in StoryForm for description field supporting bold, italic, lists (using react-quill or similar)
+- [x] T118 [US2] Add form fields in StoryForm: goalAmount (optional, number input), tags (multi-select), category (dropdown)
+- [x] T119 [US2] Validate form in StoryForm: title/titleHe required, description 300-5000 chars, min 1 image, max 5 tags
+- [x] T120 [US2] Submit story in StoryForm calling Cloud Function createStory, setting status: pending_approval, createdBy: currentUser.uid
 
 ### Cloud Functions: Story API (US2)
 
-- [ ] T121 [P] [US2] Implement functions/src/stories/createStory.ts per contracts/story-api.md POST /stories
-- [ ] T122 [US2] Validate NGO admin permission in createStory: verify currentUser.ngoIds includes request.body.ngoId
-- [ ] T123 [US2] Upload images to Cloud Storage in createStory: path stories/{storyId}/{filename}, generate signed URLs
-- [ ] T124 [US2] Create story document in createStory in Firestore stories collection with status: pending_approval, denormalized NGO data
-- [ ] T125 [US2] Send notification to platform admin in createStory (email alert that new story needs approval)
-- [ ] T126 [P] [US2] Implement functions/src/stories/updateStory.ts per contracts/story-api.md PUT /stories/:storyId
-- [ ] T127 [US2] Validate permissions in updateStory: verify currentUser is NGO admin for this story or platform admin
-- [ ] T128 [US2] Allow status changes in updateStory: NGO admin can set active→paused, platform admin can set pending_approval→active
-- [ ] T129 [US2] Revert to pending if critical fields change in updateStory: if title/description updated on active story, set status: pending_approval
+- [x] T121 [P] [US2] Implement functions/src/stories/createStory.ts per contracts/story-api.md POST /stories
+- [x] T122 [US2] Validate NGO admin permission in createStory: verify currentUser.ngoIds includes request.body.ngoId
+- [x] T123 [US2] Upload images to Cloud Storage in createStory: path stories/{storyId}/{filename}, generate signed URLs
+- [x] T124 [US2] Create story document in createStory in Firestore stories collection with status: pending_approval, denormalized NGO data
+- [x] T125 [US2] Send notification to platform admin in createStory (email alert that new story needs approval)
+- [x] T126 [P] [US2] Implement functions/src/stories/updateStory.ts per contracts/story-api.md PUT /stories/:storyId
+- [x] T127 [US2] Validate permissions in updateStory: verify currentUser is NGO admin for this story or platform admin
+- [x] T128 [US2] Allow status changes in updateStory: NGO admin can set active→paused, platform admin can set pending_approval→active
+- [x] T129 [US2] Revert to pending if critical fields change in updateStory: if title/description updated on active story, set status: pending_approval
 
 ### Dashboard: Edit Story (US2)
 
-- [ ] T130 [P] [US2] Create dashboard/src/app/(dashboard)/stories/[id]/edit/page.tsx reusing StoryForm component with pre-filled data
-- [ ] T131 [US2] Fetch existing story in edit page querying Firestore document by storyId
-- [ ] T132 [US2] Allow image replacement in edit mode: delete old image from Storage, upload new, update images array
-- [ ] T133 [US2] Add "Pause Story" button in edit page for active stories (sets status: paused, hides from feed)
-- [ ] T134 [US2] Add "Reactivate Story" button in edit page for paused stories (requires re-approval if content changed)
-- [ ] T135 [US2] Show approval status in edit page: if pending_approval, display "Waiting for admin approval" message
+- [x] T130 [P] [US2] Create dashboard/src/app/(dashboard)/stories/[id]/edit/page.tsx reusing StoryForm component with pre-filled data
+- [x] T131 [US2] Fetch existing story in edit page querying Firestore document by storyId
+- [x] T132 [US2] Allow image replacement in edit mode: delete old image from Storage, upload new, update images array
+- [x] T133 [US2] Add "Pause Story" button in edit page for active stories (sets status: paused, hides from feed)
+- [x] T134 [US2] Add "Reactivate Story" button in edit page for paused stories (requires re-approval if content changed)
+- [x] T135 [US2] Show approval status in edit page: if pending_approval, display "Waiting for admin approval" message
 
 ### Dashboard: Story Approval (Platform Admin - US2)
 
-- [ ] T136 [P] [US2] Create dashboard/src/app/(dashboard)/admin/approve/page.tsx with list of pending stories (platform admin only)
-- [ ] T137 [US2] Filter pending stories in approve page: WHERE status == 'pending_approval' ORDER BY createdAt ASC
-- [ ] T138 [US2] Add "Approve" button in approve page calling Cloud Function approveStory setting status: active, publishedAt: now
-- [ ] T139 [US2] Add "Reject" button in approve page with reason textarea, setting status: draft with rejection notes
-- [ ] T140 [US2] Implement functions/src/stories/approveStory.ts per contracts/story-api.md POST /stories/:storyId/approve
-- [ ] T141 [US2] Verify platform admin role in approveStory checking user.profileType === 'platform_admin'
-- [ ] T142 [US2] Update story on approval in approveStory: status: active, publishedAt: FieldValue.serverTimestamp(), approvedBy: adminUid
-- [ ] T143 [US2] Create audit log in approveStory writing to admin_actions collection with action: approve_story, resourceId: storyId
-- [ ] T144 [US2] Send approval email to NGO admin in approveStory notifying story is now live with link to feed
+- [x] T136 [P] [US2] Create dashboard/src/app/(dashboard)/admin/approve/page.tsx with list of pending stories (platform admin only)
+- [x] T137 [US2] Filter pending stories in approve page: WHERE status == 'pending_approval' ORDER BY createdAt ASC
+- [x] T138 [US2] Add "Approve" button in approve page calling Cloud Function approveStory setting status: active, publishedAt: now
+- [x] T139 [US2] Add "Reject" button in approve page with reason textarea, setting status: draft with rejection notes
+- [x] T140 [US2] Implement functions/src/stories/approveStory.ts per contracts/story-api.md POST /stories/:storyId/approve
+- [x] T141 [US2] Verify platform admin role in approveStory checking user.profileType === 'platform_admin'
+- [x] T142 [US2] Update story on approval in approveStory: status: active, publishedAt: FieldValue.serverTimestamp(), approvedBy: adminUid
+- [x] T143 [US2] Create audit log in approveStory writing to admin_actions collection with action: approve_story, resourceId: storyId
+- [x] T144 [US2] Send approval email to NGO admin in approveStory notifying story is now live with link to feed
 
 ### Dashboard: Donation Tracking (US2)
 
-- [ ] T145 [P] [US2] Create dashboard/src/app/(dashboard)/donations/page.tsx with table of donations for NGO's stories
-- [ ] T146 [US2] Fetch NGO donations in donations page: WHERE ngoId == currentNGO.id ORDER BY paidAt DESC with pagination
-- [ ] T147 [US2] Display donation details in table: donor name (or Anonymous), amount, story title, date, receipt link
-- [ ] T148 [US2] Add CSV export button in donations page generating downloadable CSV with all donation records
-- [ ] T149 [US2] Calculate real-time stats in donations page: total raised (sum ngoAmount), donor count (unique userIds), average donation
+- [x] T145 [P] [US2] Create dashboard/src/app/(dashboard)/donations/page.tsx with table of donations for NGO's stories
+- [x] T146 [US2] Fetch NGO donations in donations page: WHERE ngoId == currentNGO.id ORDER BY paidAt DESC with pagination
+- [x] T147 [US2] Display donation details in table: donor name (or Anonymous), amount, story title, date, receipt link
+- [x] T148 [US2] Add CSV export button in donations page generating downloadable CSV with all donation records
+- [x] T149 [US2] Calculate real-time stats in donations page: total raised (sum ngoAmount), donor count (unique userIds), average donation
 
 ### Dashboard: Testing US2 (Optional - can defer to Phase 7)
 
@@ -414,8 +414,8 @@ hamaaser/
 
 ### Dashboard Polish
 
-- [ ] T216 [P] Add loading skeletons in dashboard for table loading states
-- [ ] T217 [P] Add toast notifications in dashboard using react-hot-toast for user feedback on actions
+- [x] T216 [P] Add loading skeletons in dashboard for table loading states
+- [x] T217 [P] Add toast notifications in dashboard using react-hot-toast for user feedback on actions
 - [ ] T218 [P] Implement dark mode in dashboard matching mobile design system with Tailwind dark: classes
 - [ ] T219 [P] Add dashboard analytics using Google Analytics 4 for NGO admin behavior tracking
 - [ ] T220 Add Sentry error tracking in dashboard for production error monitoring
@@ -423,8 +423,8 @@ hamaaser/
 
 ### Security Hardening
 
-- [ ] T222 [P] Review and tighten Firestore security rules in firebase/firestore.rules ensuring role-based access control
-- [ ] T223 [P] Review and tighten Storage security rules in firebase/storage.rules preventing unauthorized image access
+- [x] T222 [P] Review and tighten Firestore security rules in firebase/firestore.rules ensuring role-based access control
+- [x] T223 [P] Review and tighten Storage security rules in firebase/storage.rules preventing unauthorized image access
 - [ ] T224 [P] Add rate limiting to Cloud Functions in functions/src/utils/rateLimiter.ts preventing abuse (10 requests/min per IP)
 - [ ] T225 [P] Add input sanitization in Cloud Functions for all user-provided text fields preventing XSS
 - [ ] T226 [P] Implement HTTPS-only enforcement in firebase.json and Expo app.json

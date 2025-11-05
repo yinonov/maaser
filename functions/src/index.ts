@@ -39,10 +39,18 @@ import { handleStripeWebhook } from './payments/handleWebhook';
 import { generateReceipt } from './receipts/generateReceipt';
 import { sendReceiptEmail } from './emails/sendReceiptEmail';
 
+// Import and export story functions
+import { createStory } from './stories/createStory';
+import { updateStory } from './stories/updateStory';
+import { approveStory } from './stories/approveStory';
+
 export { createPaymentIntent };
 export { handleStripeWebhook };
 export { generateReceipt };
 export { sendReceiptEmail };
+export { createStory };
+export { updateStory };
+export { approveStory };
 
 // Health check function
 export const helloWorld = functions.https.onRequest(withCors((request, response) => {

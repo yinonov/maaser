@@ -92,3 +92,80 @@ export const validateDocumentId = (id: string): boolean => {
   // Must not contain forward slashes
   return id.length > 0 && id.length <= 1500 && !id.includes('/');
 };
+
+// Validate story input data
+export const validateStoryInput = (data: any): string | null => {
+  // Required fields
+  if (!data.title || !data.title.trim()) {
+    return 'Title is required';
+  }
+  if (!data.titleHe || !data.titleHe.trim()) {
+    return 'Hebrew title is required';
+  }
+  if (!data.shortDescription || !data.shortDescription.trim()) {
+    return 'Short description is required';
+  }
+  if (!data.shortDescriptionHe || !data.shortDescriptionHe.trim()) {
+    return 'Hebrew short description is required';
+  }
+  if (!data.description || !data.description.trim()) {
+    return 'Description is required';
+  }
+  if (!data.descriptionHe || !data.descriptionHe.trim()) {
+    return 'Hebrew description is required';
+  }
+  if (!data.ngoId) {
+    return 'NGO ID is required';
+  }
+
+  // Length validations
+  if (data.title.length > 100) {
+    return 'Title must not exceed 100 characters';
+  }
+  if (data.shortDescription.length > 300) {
+    return 'Short description must not exceed 300 characters';
+  }
+  if (data.description.length < 300) {
+    return 'Description must be at least 300 characters';
+  }
+  if (data.description.length > 5000) {
+    return 'Description must not exceed 5000 characters';
+  }
+
+  // Tags validation
+  if (!data.tags || !Array.isArray(data.tags) || data.tags.length === 0) {
+    return 'At least one tag is required';
+  }
+  if (data.tags.length > 5) {
+    return 'Maximum 5 tags allowed';
+  }
+
+  // Images validation
+  if (!data.images || !Array.isArray(data.images) || data.images.length === 0) {
+    return 'At least one image is required';
+  }
+  if (data.images.length > 5) {
+    return 'Maximum 5 images allowed';
+  }
+
+  // Category validation
+  if (!data.category) {
+    return 'Category is required';
+  }
+
+  // Goal amount validation (if provided)
+  if (data.goalAmount !== null && data.goalAmount !== undefined) {
+    if (typeof data.goalAmount !== 'number') {
+      return 'Goal amount must be a number';
+    }
+    if (data.goalAmount < 50000) {
+      return 'Goal amount must be at least ₪500 (50000 agorot)';
+    }
+    if (data.goalAmount > 100000000) {
+      return 'Goal amount must not exceed ₪1,000,000';
+    }
+  }
+
+  return null;
+};
+

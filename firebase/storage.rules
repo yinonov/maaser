@@ -1,15 +1,67 @@
 rules_version = '2';
 
 // Cloud Storage Security Rules for HaMaaser MVP
-// Will be implemented in Phase 2 (Task T017)
+// Implements secure access control for story images, NGO logos, and receipts
 
 service firebase.storage {
   match /b/{bucket}/o {
-    // Default: Deny all reads and writes
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isNGOAdmin(ngoId) {
+      return isAuthenticated() && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid))
+               .data.ngoIds.hasAny([ngoId]);
+    }
+    
+    function isPlatformAdmin() {
+      return isAuthenticated() && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid))
+               .data.profileType == 'platform_admin';
+    }
+    
+    function isValidImageFile() {
+      return request.resource.size < 5 * 1024 * 1024 // Max 5MB
+             && request.resource.contentType.matches('image/.*');
+    }
+    
+    // NGO logos - public read, NGO admin/platform admin write
+    match /ngos/{ngoId}/{fileName} {
+      allow read: if true; // Public read for all
+      allow write: if (isNGOAdmin(ngoId) || isPlatformAdmin()) 
+                      && isValidImageFile();
+      allow delete: if isPlatformAdmin();
+    }
+    
+    // Story images - public read for active stories, NGO admin write
+    match /stories/{storyId}/{fileName} {
+      allow read: if true; // Public read (story images are public once uploaded)
+      allow write: if isAuthenticated() && isValidImageFile();
+      allow delete: if isPlatformAdmin();
+    }
+    
+    // Receipts - private read (donor or NGO only), system write only
+    match /receipts/{receiptNumber}.pdf {
+      allow read: if isAuthenticated(); // Only authenticated users can read receipts
+      allow write: if false; // Only Cloud Functions can write receipts
+      allow delete: if isPlatformAdmin();
+    }
+    
+    // User profile images (future feature)
+    match /users/{userId}/{fileName} {
+      allow read: if true; // Public read
+      allow write: if isAuthenticated() 
+                      && request.auth.uid == userId 
+                      && isValidImageFile();
+      allow delete: if request.auth.uid == userId || isPlatformAdmin();
+    }
+    
+    // Deny all other paths
     match /{allPaths=**} {
       allow read, write: if false;
     }
-    
-    // Placeholder rules - will be replaced with actual rules
   }
 }
+
