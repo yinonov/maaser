@@ -208,10 +208,10 @@ hamaaser/
 
 ### Dashboard: Authentication (US2)
 
-- [ ] T104 [P] [US2] Create dashboard/src/app/(auth)/login/page.tsx with email/password form using NextAuth
-- [ ] T105 [US2] Configure NextAuth callbacks in dashboard/src/app/api/auth/[...nextauth]/route.ts to check user.profileType === 'ngo_admin'
-- [ ] T106 [US2] Add protected route middleware in dashboard/src/middleware.ts redirecting non-authenticated users to /login
-- [ ] T107 [US2] Create dashboard/src/app/(dashboard)/page.tsx with NGO admin dashboard showing stats (total donations, active stories)
+- [x] T104 [P] [US2] Create dashboard/src/app/(auth)/login/page.tsx with email/password form using NextAuth
+- [x] T105 [US2] Configure NextAuth callbacks in dashboard/src/app/api/auth/[...nextauth]/route.ts to check user.profileType === 'ngo_admin'
+- [x] T106 [US2] Add protected route middleware in dashboard/src/middleware.ts redirecting non-authenticated users to /login
+- [x] T107 [US2] Create dashboard/src/app/(dashboard)/page.tsx with NGO admin dashboard showing stats (total donations, active stories)
 
 ### Dashboard: Story List (US2)
 
