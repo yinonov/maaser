@@ -1,4 +1,4 @@
-// Firebase Client SDK configuration for client-side operations
+// Firebase client SDK configuration for client-side operations
 // Used in dashboard pages and components
 
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
@@ -15,17 +15,51 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-let app: FirebaseApp;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApps()[0];
+// Lazy initialization function
+let app: FirebaseApp | null = null;
+
+function getApp(): FirebaseApp {
+  if (getApps().length > 0) {
+    return getApps()[0];
+  }
+  
+  if (!app) {
+    app = initializeApp(firebaseConfig);
+  }
+  
+  return app;
 }
 
-// Export services
-export const auth: Auth = getAuth(app);
-export const db: Firestore = getFirestore(app);
-export const storage: FirebaseStorage = getStorage(app);
+// Lazy-initialize services
+let _auth: Auth | null = null;
+let _db: Firestore | null = null;
+let _storage: FirebaseStorage | null = null;
 
-export default app;
+export const auth = new Proxy({} as Auth, {
+  get: (_target, prop) => {
+    if (!_auth) {
+      _auth = getAuth(getApp());
+    }
+    return (_auth as any)[prop];
+  }
+});
+
+export const db = new Proxy({} as Firestore, {
+  get: (_target, prop) => {
+    if (!_db) {
+      _db = getFirestore(getApp());
+    }
+    return (_db as any)[prop];
+  }
+});
+
+export const storage = new Proxy({} as FirebaseStorage, {
+  get: (_target, prop) => {
+    if (!_storage) {
+      _storage = getStorage(getApp());
+    }
+    return (_storage as any)[prop];
+  }
+});
+
+export default getApp;
