@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import cors from 'cors';
+import { Request, Response } from 'firebase-functions/v1';
 
 // Initialize Firebase Admin SDK
 admin.initializeApp();
@@ -17,7 +18,9 @@ const corsHandler = cors({
 });
 
 // Helper to wrap Cloud Functions with CORS
-export const withCors = (handler: functions.https.RequestHandler): functions.https.RequestHandler => {
+type RequestHandler = (req: Request, res: Response) => void | Promise<void>;
+
+export const withCors = (handler: RequestHandler): RequestHandler => {
   return (req, res) => {
     return corsHandler(req, res, () => handler(req, res));
   };

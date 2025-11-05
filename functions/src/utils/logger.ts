@@ -62,4 +62,11 @@ export const logger = {
   },
 };
 
+// Export individual functions for convenience
+export const logDebug = logger.debug;
+export const logInfo = logger.info;
+export const logWarn = logger.warn;
+export const logError = logger.error;
+export const logAudit = logger.audit;
+
 export default logger;
