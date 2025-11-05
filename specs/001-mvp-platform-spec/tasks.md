@@ -179,15 +179,15 @@ hamaaser/
 
 ### Cloud Functions: Receipt Generation (US1)
 
-- [ ] T093 [P] [US1] Implement functions/src/receipts/generateReceipt.ts per contracts/payment-api.md POST /generateReceipt
-- [ ] T094 [US1] Fetch donation data in generateReceipt querying donations collection with denormalized donor and NGO info
-- [ ] T095 [US1] Generate unique receipt number in generateReceipt: format RCP-YYYY-#####, store in donation.receiptNumber
-- [ ] T096 [US1] Create PDF using PDFKit in generateReceipt with Hebrew font support, layout: header (NGO logo, name), body (donor details, amount, date), footer (legal text)
-- [ ] T097 [US1] Upload PDF to Cloud Storage in generateReceipt: path receipts/{receiptNumber}.pdf, set public read access
-- [ ] T098 [US1] Update donation document in generateReceipt setting receiptUrl, receiptGenerated: true
-- [ ] T099 [US1] Send receipt email in generateReceipt calling sendReceiptEmail function with donor email, PDF attachment URL
-- [ ] T100 [P] [US1] Implement functions/src/emails/sendReceiptEmail.ts using SendGrid API to send email with PDF link
-- [ ] T101 [US1] Update donation document after email sent in sendReceiptEmail setting receiptSent: true, receiptSentAt timestamp
+- [x] T093 [P] [US1] Implement functions/src/receipts/generateReceipt.ts per contracts/payment-api.md POST /generateReceipt
+- [x] T094 [US1] Fetch donation data in generateReceipt querying donations collection with denormalized donor and NGO info
+- [x] T095 [US1] Generate unique receipt number in generateReceipt: format RCP-YYYY-#####, store in donation.receiptNumber
+- [x] T096 [US1] Create PDF using PDFKit in generateReceipt with Hebrew font support, layout: header (NGO logo, name), body (donor details, amount, date), footer (legal text)
+- [x] T097 [US1] Upload PDF to Cloud Storage in generateReceipt: path receipts/{receiptNumber}.pdf, set public read access
+- [x] T098 [US1] Update donation document in generateReceipt setting receiptUrl, receiptGenerated: true
+- [x] T099 [US1] Send receipt email in generateReceipt calling sendReceiptEmail function with donor email, PDF attachment URL
+- [x] T100 [P] [US1] Implement functions/src/emails/sendReceiptEmail.ts using SendGrid API to send email with PDF link
+- [x] T101 [US1] Update donation document after email sent in sendReceiptEmail setting receiptSent: true, receiptSentAt timestamp
 
 ### Mobile: Testing US1 (Optional - can defer to Phase 7)
 

@@ -32,8 +32,14 @@ export const auth = admin.auth();
 import { createPaymentIntent } from './payments/createPaymentIntent';
 import { handleStripeWebhook } from './payments/handleWebhook';
 
+// Import and export receipt functions
+import { generateReceipt } from './receipts/generateReceipt';
+import { sendReceiptEmail } from './emails/sendReceiptEmail';
+
 export { createPaymentIntent };
 export { handleStripeWebhook };
+export { generateReceipt };
+export { sendReceiptEmail };
 
 // Health check function
 export const helloWorld = functions.https.onRequest(withCors((request, response) => {
