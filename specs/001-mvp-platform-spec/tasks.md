@@ -116,83 +116,83 @@ hamaaser/
 
 ### Mobile: Authentication (US1)
 
-- [ ] T048 [P] [US1] Create mobile/src/screens/auth/WelcomeScreen.tsx with "Sign Up" and "Login" buttons per registration-login.html
-- [ ] T049 [P] [US1] Create mobile/src/screens/auth/SignUpScreen.tsx with email, password, full name fields and Google OAuth button
-- [ ] T050 [P] [US1] Create mobile/src/screens/auth/LoginScreen.tsx with email, password fields and "Forgot Password" link
-- [ ] T051 [US1] Implement Firebase email/password registration in mobile/src/services/auth.ts with email verification trigger
-- [ ] T052 [US1] Implement Firebase Google OAuth in mobile/src/services/auth.ts using expo-auth-session for native sign-in
-- [ ] T053 [US1] Create Firestore user document on registration in mobile/src/services/auth.ts writing to users collection per data-model.md
-- [ ] T054 [US1] Add auth state listener in mobile/src/stores/authStore.ts to persist login across app restarts
-- [ ] T055 [US1] Implement email verification check in mobile/src/screens/auth/VerifyEmailScreen.tsx with resend button
+- [x] T048 [P] [US1] Create mobile/src/screens/auth/WelcomeScreen.tsx with "Sign Up" and "Login" buttons per registration-login.html
+- [x] T049 [P] [US1] Create mobile/src/screens/auth/SignUpScreen.tsx with email, password, full name fields and Google OAuth button
+- [x] T050 [P] [US1] Create mobile/src/screens/auth/LoginScreen.tsx with email, password fields and "Forgot Password" link
+- [x] T051 [US1] Implement Firebase email/password registration in mobile/src/services/auth.ts with email verification trigger
+- [x] T052 [US1] Implement Firebase Google OAuth in mobile/src/services/auth.ts using expo-auth-session for native sign-in
+- [x] T053 [US1] Create Firestore user document on registration in mobile/src/services/auth.ts writing to users collection per data-model.md
+- [x] T054 [US1] Add auth state listener in mobile/src/stores/authStore.ts to persist login across app restarts
+- [x] T055 [US1] Implement email verification check in mobile/src/screens/auth/VerifyEmailScreen.tsx with resend button
 
 ### Mobile: Story Feed (US1)
 
-- [ ] T056 [P] [US1] Create mobile/src/screens/feed/FeedScreen.tsx with FlatList for infinite scroll story feed per home.html
-- [ ] T057 [P] [US1] Create mobile/src/components/StoryCard.tsx with thumbnail, title, short description, progress bar, donate button
-- [ ] T058 [US1] Implement Firestore query in mobile/src/services/storyService.ts: GET active stories ordered by publishedAt desc with limit 10
-- [ ] T059 [US1] Add pagination to FeedScreen in mobile/src/screens/feed/FeedScreen.tsx using onEndReached with offset incrementing
-- [ ] T060 [US1] Implement pull-to-refresh in FeedScreen in mobile/src/screens/feed/FeedScreen.tsx to reload latest stories
-- [ ] T061 [US1] Add story detail navigation on StoryCard tap in mobile/src/components/StoryCard.tsx routing to StoryDetailScreen
+- [x] T056 [P] [US1] Create mobile/src/screens/feed/FeedScreen.tsx with FlatList for infinite scroll story feed per home.html
+- [x] T057 [P] [US1] Create mobile/src/components/StoryCard.tsx with thumbnail, title, short description, progress bar, donate button
+- [x] T058 [US1] Implement Firestore query in mobile/src/services/storyService.ts: GET active stories ordered by publishedAt desc with limit 10
+- [x] T059 [US1] Add pagination to FeedScreen in mobile/src/screens/feed/FeedScreen.tsx using onEndReached with offset incrementing
+- [x] T060 [US1] Implement pull-to-refresh in FeedScreen in mobile/src/screens/feed/FeedScreen.tsx to reload latest stories
+- [x] T061 [US1] Add story detail navigation on StoryCard tap in mobile/src/components/StoryCard.tsx routing to StoryDetailScreen
 
 ### Mobile: Story Detail (US1)
 
-- [ ] T062 [P] [US1] Create mobile/src/screens/feed/StoryDetailScreen.tsx with hero image, full description, photo gallery, progress bar
-- [ ] T063 [US1] Implement Firestore document read in mobile/src/services/storyService.ts: GET /stories/:storyId with denormalized NGO data
-- [ ] T064 [US1] Display donation progress in StoryDetailScreen calculating percentage: (raisedAmount / goalAmount) * 100
-- [ ] T065 [US1] Add scrollable image gallery in StoryDetailScreen using horizontal FlatList for story.images array
-- [ ] T066 [US1] Display NGO information section in StoryDetailScreen with NGO logo, name, verified badge from denormalized fields
-- [ ] T067 [US1] Add "Donate Now" button in StoryDetailScreen navigating to DonationFlowScreen with storyId parameter
+- [x] T062 [P] [US1] Create mobile/src/screens/feed/StoryDetailScreen.tsx with hero image, full description, photo gallery, progress bar
+- [x] T063 [US1] Implement Firestore document read in mobile/src/services/storyService.ts: GET /stories/:storyId with denormalized NGO data
+- [x] T064 [US1] Display donation progress in StoryDetailScreen calculating percentage: (raisedAmount / goalAmount) * 100
+- [x] T065 [US1] Add scrollable image gallery in StoryDetailScreen using horizontal FlatList for story.images array
+- [x] T066 [US1] Display NGO information section in StoryDetailScreen with NGO logo, name, verified badge from denormalized fields
+- [x] T067 [US1] Add "Donate Now" button in StoryDetailScreen navigating to DonationFlowScreen with storyId parameter
 
 ### Mobile: Donation Flow (US1)
 
-- [ ] T068 [P] [US1] Create mobile/src/screens/donation/DonationFlowScreen.tsx with amount selection, message input per dontation.html
-- [ ] T069 [US1] Add preset amount buttons in DonationFlowScreen (18₪, 50₪, 100₪) with active state styling
-- [ ] T070 [US1] Add custom amount input in DonationFlowScreen with numeric keyboard and validation (min 5₪)
-- [ ] T071 [US1] Display fee breakdown in DonationFlowScreen: "98₪ to NGO + 2₪ platform fee" with 2% calculation
-- [ ] T072 [US1] Add optional message textarea in DonationFlowScreen (max 500 chars) and anonymous toggle checkbox
-- [ ] T073 [US1] Implement Stripe payment intent creation in mobile/src/services/paymentService.ts calling Cloud Function createPaymentIntent
-- [ ] T074 [US1] Integrate @stripe/stripe-react-native in DonationFlowScreen opening Stripe Checkout webview with clientSecret
-- [ ] T075 [US1] Handle payment success callback in DonationFlowScreen navigating to SuccessScreen with donationId
-- [ ] T076 [US1] Handle payment failure in DonationFlowScreen showing error alert with retry option
+- [x] T068 [P] [US1] Create mobile/src/screens/donation/DonationFlowScreen.tsx with amount selection, message input per dontation.html
+- [x] T069 [US1] Add preset amount buttons in DonationFlowScreen (18₪, 50₪, 100₪) with active state styling
+- [x] T070 [US1] Add custom amount input in DonationFlowScreen with numeric keyboard and validation (min 5₪)
+- [x] T071 [US1] Display fee breakdown in DonationFlowScreen: "98₪ to NGO + 2₪ platform fee" with 2% calculation
+- [x] T072 [US1] Add optional message textarea in DonationFlowScreen (max 500 chars) and anonymous toggle checkbox
+- [x] T073 [US1] Implement Stripe payment intent creation in mobile/src/services/paymentService.ts calling Cloud Function createPaymentIntent
+- [x] T074 [US1] Integrate @stripe/stripe-react-native in DonationFlowScreen opening Stripe Checkout webview with clientSecret
+- [x] T075 [US1] Handle payment success callback in DonationFlowScreen navigating to SuccessScreen with donationId
+- [x] T076 [US1] Handle payment failure in DonationFlowScreen showing error alert with retry option
 
 ### Mobile: Donation Success (US1)
 
-- [ ] T077 [P] [US1] Create mobile/src/screens/donation/SuccessScreen.tsx with checkmark animation, donation summary, "View Receipt" button
-- [ ] T078 [US1] Display donation details in SuccessScreen: amount, story title, NGO name, receipt number from donation document
-- [ ] T079 [US1] Add "Back to Stories" button in SuccessScreen navigating to FeedScreen with feed refresh
-- [ ] T080 [US1] Add "Share" button in SuccessScreen (placeholder for future - out of scope per spec.md)
+- [x] T077 [P] [US1] Create mobile/src/screens/donation/SuccessScreen.tsx with checkmark animation, donation summary, "View Receipt" button
+- [x] T078 [US1] Display donation details in SuccessScreen: amount, story title, NGO name, receipt number from donation document
+- [x] T079 [US1] Add "Back to Stories" button in SuccessScreen navigating to FeedScreen with feed refresh
+- [x] T080 [US1] Add "Share" button in SuccessScreen (placeholder for future - out of scope per spec.md)
 
 ### Cloud Functions: Payment API (US1)
 
-- [ ] T081 [P] [US1] Implement functions/src/payments/createPaymentIntent.ts per contracts/payment-api.md POST /createPaymentIntent
-- [ ] T082 [US1] Validate request in createPaymentIntent: check storyId exists, story status is active, amount >= 500 agorot
-- [ ] T083 [US1] Calculate platform fee in createPaymentIntent: platformFee = Math.floor(amount * 0.02), ngoAmount = amount - platformFee
-- [ ] T084 [US1] Create Stripe PaymentIntent in createPaymentIntent using stripe.paymentIntents.create with amount, currency ILS
-- [ ] T085 [US1] Create Firestore donation document in createPaymentIntent with status pending, return donationId and clientSecret
-- [ ] T086 [P] [US1] Implement functions/src/payments/handleWebhook.ts per contracts/payment-api.md POST /handleStripeWebhook
-- [ ] T087 [US1] Verify Stripe webhook signature in handleWebhook using stripe.webhooks.constructEvent with signing secret
-- [ ] T088 [US1] Handle payment_intent.succeeded event in handleWebhook updating donation status to succeeded, setting paidAt timestamp
-- [ ] T089 [US1] Update story stats on payment success in handleWebhook: increment raisedAmount, donationCount in stories collection
-- [ ] T090 [US1] Update user stats on payment success in handleWebhook: increment totalDonated, donationCount in users collection
-- [ ] T091 [US1] Update NGO stats on payment success in handleWebhook: increment totalDonationsReceived, totalDonors in ngos collection
-- [ ] T092 [US1] Trigger receipt generation on payment success in handleWebhook calling generateReceipt function with donationId
+- [x] T081 [P] [US1] Implement functions/src/payments/createPaymentIntent.ts per contracts/payment-api.md POST /createPaymentIntent
+- [x] T082 [US1] Validate request in createPaymentIntent: check storyId exists, story status is active, amount >= 500 agorot
+- [x] T083 [US1] Calculate platform fee in createPaymentIntent: platformFee = Math.floor(amount * 0.02), ngoAmount = amount - platformFee
+- [x] T084 [US1] Create Stripe PaymentIntent in createPaymentIntent using stripe.paymentIntents.create with amount, currency ILS
+- [x] T085 [US1] Create Firestore donation document in createPaymentIntent with status pending, return donationId and clientSecret
+- [x] T086 [P] [US1] Implement functions/src/payments/handleWebhook.ts per contracts/payment-api.md POST /handleStripeWebhook
+- [x] T087 [US1] Verify Stripe webhook signature in handleWebhook using stripe.webhooks.constructEvent with signing secret
+- [x] T088 [US1] Handle payment_intent.succeeded event in handleWebhook updating donation status to succeeded, setting paidAt timestamp
+- [x] T089 [US1] Update story stats on payment success in handleWebhook: increment raisedAmount, donationCount in stories collection
+- [x] T090 [US1] Update user stats on payment success in handleWebhook: increment totalDonated, donationCount in users collection
+- [x] T091 [US1] Update NGO stats on payment success in handleWebhook: increment totalDonationsReceived, totalDonors in ngos collection
+- [x] T092 [US1] Trigger receipt generation on payment success in handleWebhook calling generateReceipt function with donationId
 
 ### Cloud Functions: Receipt Generation (US1)
 
-- [ ] T093 [P] [US1] Implement functions/src/receipts/generateReceipt.ts per contracts/payment-api.md POST /generateReceipt
-- [ ] T094 [US1] Fetch donation data in generateReceipt querying donations collection with denormalized donor and NGO info
-- [ ] T095 [US1] Generate unique receipt number in generateReceipt: format RCP-YYYY-#####, store in donation.receiptNumber
-- [ ] T096 [US1] Create PDF using PDFKit in generateReceipt with Hebrew font support, layout: header (NGO logo, name), body (donor details, amount, date), footer (legal text)
-- [ ] T097 [US1] Upload PDF to Cloud Storage in generateReceipt: path receipts/{receiptNumber}.pdf, set public read access
-- [ ] T098 [US1] Update donation document in generateReceipt setting receiptUrl, receiptGenerated: true
-- [ ] T099 [US1] Send receipt email in generateReceipt calling sendReceiptEmail function with donor email, PDF attachment URL
-- [ ] T100 [P] [US1] Implement functions/src/emails/sendReceiptEmail.ts using SendGrid API to send email with PDF link
-- [ ] T101 [US1] Update donation document after email sent in sendReceiptEmail setting receiptSent: true, receiptSentAt timestamp
+- [x] T093 [P] [US1] Implement functions/src/receipts/generateReceipt.ts per contracts/payment-api.md POST /generateReceipt
+- [x] T094 [US1] Fetch donation data in generateReceipt querying donations collection with denormalized donor and NGO info
+- [x] T095 [US1] Generate unique receipt number in generateReceipt: format RCP-YYYY-#####, store in donation.receiptNumber
+- [x] T096 [US1] Create PDF using PDFKit in generateReceipt with Hebrew font support, layout: header (NGO logo, name), body (donor details, amount, date), footer (legal text)
+- [x] T097 [US1] Upload PDF to Cloud Storage in generateReceipt: path receipts/{receiptNumber}.pdf, set public read access
+- [x] T098 [US1] Update donation document in generateReceipt setting receiptUrl, receiptGenerated: true
+- [x] T099 [US1] Send receipt email in generateReceipt calling sendReceiptEmail function with donor email, PDF attachment URL
+- [x] T100 [P] [US1] Implement functions/src/emails/sendReceiptEmail.ts using SendGrid API to send email with PDF link
+- [x] T101 [US1] Update donation document after email sent in sendReceiptEmail setting receiptSent: true, receiptSentAt timestamp
 
 ### Mobile: Testing US1 (Optional - can defer to Phase 7)
 
-- [ ] T102 [P] [US1] Write integration test in mobile/**tests**/auth.test.ts: signup → login → verify email flow
-- [ ] T103 [P] [US1] Write integration test in mobile/**tests**/donation.test.ts: browse stories → select story → donate → receive receipt
+- [ ] T102 [P] [US1] Write integration test in mobile/**tests**/auth.test.ts: signup → login → verify email flow (OPTIONAL - deferred per constitution 30% coverage)
+- [ ] T103 [P] [US1] Write integration test in mobile/**tests**/donation.test.ts: browse stories → select story → donate → receive receipt (OPTIONAL - deferred per constitution 30% coverage)
 
 **Checkpoint**: USER STORY 1 COMPLETE - MVP is now functional! Can test end-to-end: signup → browse → donate → receipt
 

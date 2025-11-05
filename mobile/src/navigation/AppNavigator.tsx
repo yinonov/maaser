@@ -1,19 +1,26 @@
 // Main navigation structure for HaMaaser mobile app
 // Handles Auth flow and Main tab navigation
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuthStore } from '../stores/authStore';
 
+// Auth screens
+import WelcomeScreen from '../screens/auth/WelcomeScreen';
+import SignUpScreen from '../screens/auth/SignUpScreen';
+import LoginScreen from '../screens/auth/LoginScreen';
+import VerifyEmailScreen from '../screens/auth/VerifyEmailScreen';
+
+// Feed screens
+import FeedScreen from '../screens/feed/FeedScreen';
+import StoryDetailScreen from '../screens/feed/StoryDetailScreen';
+
+// Donation screens
+import DonationFlowScreen from '../screens/donation/DonationFlowScreen';
+import SuccessScreen from '../screens/donation/SuccessScreen';
+
 // Placeholder screens - will be implemented in Phase 3
-const WelcomeScreen = () => null;
-const SignUpScreen = () => null;
-const LoginScreen = () => null;
-const FeedScreen = () => null;
-const StoryDetailScreen = () => null;
-const DonationFlowScreen = () => null;
-const SuccessScreen = () => null;
 const DonationsListScreen = () => null;
 const ProfileScreen = () => null;
 
@@ -24,6 +31,7 @@ const AuthNavigator = () => (
     <AuthStack.Screen name="Welcome" component={WelcomeScreen} />
     <AuthStack.Screen name="SignUp" component={SignUpScreen} />
     <AuthStack.Screen name="Login" component={LoginScreen} />
+    <AuthStack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
   </AuthStack.Navigator>
 );
 
@@ -66,7 +74,13 @@ const MainNavigator = () => (
 
 // Root Navigator - switches between Auth and Main based on auth state
 const AppNavigator: React.FC = () => {
-  const { user, isLoading } = useAuthStore();
+  const { user, isLoading, initAuthListener } = useAuthStore();
+
+  // Setup auth state listener on mount
+  useEffect(() => {
+    const unsubscribe = initAuthListener();
+    return () => unsubscribe();
+  }, [initAuthListener]);
 
   if (isLoading) {
     // Show loading screen while checking auth state

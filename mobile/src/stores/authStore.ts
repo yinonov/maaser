@@ -3,6 +3,7 @@
 
 import { create } from 'zustand';
 import { User } from '../../../shared/types';
+import { setupAuthListener } from '../services/auth';
 
 interface AuthState {
   user: User | null;
@@ -14,6 +15,7 @@ interface AuthState {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   logout: () => void;
+  initAuthListener: () => () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -28,4 +30,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   setError: (error) => set({ error, isLoading: false }),
   
   logout: () => set({ user: null, isLoading: false, error: null }),
+
+  initAuthListener: () => {
+    return setupAuthListener((user) => {
+      set({ user, isLoading: false, error: null });
+    });
+  },
 }));
