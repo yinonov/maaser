@@ -79,12 +79,12 @@ hamaaser/
 - [x] T027 Configure Firebase in mobile/src/services/firebase.ts with Firestore, Auth, Storage initialization
 - [x] T028 Create mobile/src/constants/colors.ts with design system colors (#d4a373, #eebd2b, etc.) from design-reference.md
 - [x] T029 Create mobile/src/constants/config.ts with environment variables (API URLs, Stripe publishable key)
-- [ ] T030 Setup i18next in mobile/src/services/i18n.ts with Hebrew/English support and RTL handling
-- [ ] T031 Configure Expo app.json with iOS bundle ID, Android package, splash screen, app icon placeholders
-- [ ] T032 Create mobile/src/navigation/AppNavigator.tsx with React Navigation stack structure (Auth, Main tabs)
-- [ ] T033 [P] Create Zustand stores: mobile/src/stores/authStore.ts for user authentication state
-- [ ] T034 [P] Create mobile/src/stores/storyStore.ts for stories feed state
-- [ ] T035 [P] Create mobile/src/stores/donationStore.ts for donation flow state
+- [x] T030 Setup i18next in mobile/src/services/i18n.ts with Hebrew/English support and RTL handling
+- [x] T031 Configure Expo app.json with iOS bundle ID, Android package, splash screen, app icon placeholders
+- [x] T032 Create mobile/src/navigation/AppNavigator.tsx with React Navigation stack structure (Auth, Main tabs)
+- [x] T033 [P] Create Zustand stores: mobile/src/stores/authStore.ts for user authentication state
+- [x] T034 [P] Create mobile/src/stores/storyStore.ts for stories feed state
+- [x] T035 [P] Create mobile/src/stores/donationStore.ts for donation flow state
 
 ### Dashboard Foundation
 
@@ -92,17 +92,17 @@ hamaaser/
 - [x] T037 Configure Firebase Admin SDK in dashboard/src/lib/firebase-admin.ts with service account credentials
 - [x] T038 Setup NextAuth.js in dashboard/src/app/api/auth/[...nextauth]/route.ts with Firebase Auth provider
 - [x] T039 Create dashboard layout in dashboard/src/app/(dashboard)/layout.tsx with sidebar navigation
-- [ ] T040 Create dashboard/src/components/Sidebar.tsx with NGO admin navigation menu (Stories, Donations, Settings)
-- [ ] T041 Configure Tailwind CSS in dashboard/tailwind.config.ts with design system colors from design-reference.md
+- [x] T040 Create dashboard/src/components/Sidebar.tsx with NGO admin navigation menu (Stories, Donations, Settings)
+- [x] T041 Configure Tailwind CSS in dashboard/tailwind.config.ts with design system colors from design-reference.md
 
 ### Cloud Functions Foundation
 
-- [ ] T042 Install Cloud Functions dependencies: `stripe@14+, pdfkit@0.14+, sendgrid/mail@8+`
-- [ ] T043 Create functions/src/utils/validation.ts with input validation helpers for API requests
-- [ ] T044 Create functions/src/utils/stripe.ts with Stripe client initialization using secret key from env
-- [ ] T045 Configure CORS in functions/src/index.ts to allow requests from mobile app and dashboard origins
-- [ ] T046 Setup error handling middleware in functions/src/utils/errorHandler.ts for consistent API error responses
-- [ ] T047 Create functions/src/utils/logger.ts with structured logging for Cloud Functions (info, error, audit levels)
+- [x] T042 Install Cloud Functions dependencies: `stripe@14+, pdfkit@0.14+, sendgrid/mail@8+`
+- [x] T043 Create functions/src/utils/validation.ts with input validation helpers for API requests
+- [x] T044 Create functions/src/utils/stripe.ts with Stripe client initialization using secret key from env
+- [x] T045 Configure CORS in functions/src/index.ts to allow requests from mobile app and dashboard origins
+- [x] T046 Setup error handling middleware in functions/src/utils/errorHandler.ts for consistent API error responses
+- [x] T047 Create functions/src/utils/logger.ts with structured logging for Cloud Functions (info, error, audit levels)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 

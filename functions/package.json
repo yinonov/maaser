@@ -23,6 +23,7 @@
     "stripe": "^19.2.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20.0.0",
     "typescript": "^5.3.0"
   },

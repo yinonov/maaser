@@ -1,0 +1,58 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done"
+  },
+  "auth": {
+    "welcome": "Welcome to HaMaaser",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "forgotPassword": "Forgot Password?",
+    "verifyEmail": "Verify Email",
+    "resendVerification": "Resend Verification Email"
+  },
+  "feed": {
+    "title": "Stories",
+    "search": "Search stories",
+    "pullToRefresh": "Pull to refresh",
+    "donate": "Donate"
+  },
+  "story": {
+    "donateNow": "Donate Now",
+    "raised": "Raised",
+    "goal": "Goal",
+    "donors": "Donors",
+    "verified": "Verified NGO"
+  },
+  "donation": {
+    "amount": "Amount",
+    "message": "Message (Optional)",
+    "anonymous": "Donate Anonymously",
+    "platformFee": "Platform Fee",
+    "toNGO": "to NGO",
+    "total": "Total",
+    "completeDonation": "Complete Donation",
+    "success": "Donation Successful!",
+    "viewReceipt": "View Receipt",
+    "backToStories": "Back to Stories"
+  },
+  "profile": {
+    "myDonations": "My Donations",
+    "settings": "Settings",
+    "language": "Language",
+    "currency": "Currency"
+  }
+}
