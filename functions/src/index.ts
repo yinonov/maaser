@@ -28,9 +28,14 @@ export const db = admin.firestore();
 export const storage = admin.storage();
 export const auth = admin.auth();
 
-// Placeholder Cloud Functions
-// Will be implemented in Phase 3 and beyond
+// Import and export payment functions
+import { createPaymentIntent } from './payments/createPaymentIntent';
+import { handleStripeWebhook } from './payments/handleWebhook';
 
+export { createPaymentIntent };
+export { handleStripeWebhook };
+
+// Health check function
 export const helloWorld = functions.https.onRequest(withCors((request, response) => {
   response.json({ message: 'HaMaaser Cloud Functions - Ready' });
 }));

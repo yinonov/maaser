@@ -164,18 +164,18 @@ hamaaser/
 
 ### Cloud Functions: Payment API (US1)
 
-- [ ] T081 [P] [US1] Implement functions/src/payments/createPaymentIntent.ts per contracts/payment-api.md POST /createPaymentIntent
-- [ ] T082 [US1] Validate request in createPaymentIntent: check storyId exists, story status is active, amount >= 500 agorot
-- [ ] T083 [US1] Calculate platform fee in createPaymentIntent: platformFee = Math.floor(amount * 0.02), ngoAmount = amount - platformFee
-- [ ] T084 [US1] Create Stripe PaymentIntent in createPaymentIntent using stripe.paymentIntents.create with amount, currency ILS
-- [ ] T085 [US1] Create Firestore donation document in createPaymentIntent with status pending, return donationId and clientSecret
-- [ ] T086 [P] [US1] Implement functions/src/payments/handleWebhook.ts per contracts/payment-api.md POST /handleStripeWebhook
-- [ ] T087 [US1] Verify Stripe webhook signature in handleWebhook using stripe.webhooks.constructEvent with signing secret
-- [ ] T088 [US1] Handle payment_intent.succeeded event in handleWebhook updating donation status to succeeded, setting paidAt timestamp
-- [ ] T089 [US1] Update story stats on payment success in handleWebhook: increment raisedAmount, donationCount in stories collection
-- [ ] T090 [US1] Update user stats on payment success in handleWebhook: increment totalDonated, donationCount in users collection
-- [ ] T091 [US1] Update NGO stats on payment success in handleWebhook: increment totalDonationsReceived, totalDonors in ngos collection
-- [ ] T092 [US1] Trigger receipt generation on payment success in handleWebhook calling generateReceipt function with donationId
+- [x] T081 [P] [US1] Implement functions/src/payments/createPaymentIntent.ts per contracts/payment-api.md POST /createPaymentIntent
+- [x] T082 [US1] Validate request in createPaymentIntent: check storyId exists, story status is active, amount >= 500 agorot
+- [x] T083 [US1] Calculate platform fee in createPaymentIntent: platformFee = Math.floor(amount * 0.02), ngoAmount = amount - platformFee
+- [x] T084 [US1] Create Stripe PaymentIntent in createPaymentIntent using stripe.paymentIntents.create with amount, currency ILS
+- [x] T085 [US1] Create Firestore donation document in createPaymentIntent with status pending, return donationId and clientSecret
+- [x] T086 [P] [US1] Implement functions/src/payments/handleWebhook.ts per contracts/payment-api.md POST /handleStripeWebhook
+- [x] T087 [US1] Verify Stripe webhook signature in handleWebhook using stripe.webhooks.constructEvent with signing secret
+- [x] T088 [US1] Handle payment_intent.succeeded event in handleWebhook updating donation status to succeeded, setting paidAt timestamp
+- [x] T089 [US1] Update story stats on payment success in handleWebhook: increment raisedAmount, donationCount in stories collection
+- [x] T090 [US1] Update user stats on payment success in handleWebhook: increment totalDonated, donationCount in users collection
+- [x] T091 [US1] Update NGO stats on payment success in handleWebhook: increment totalDonationsReceived, totalDonors in ngos collection
+- [x] T092 [US1] Trigger receipt generation on payment success in handleWebhook calling generateReceipt function with donationId
 
 ### Cloud Functions: Receipt Generation (US1)
 
