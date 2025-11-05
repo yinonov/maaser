@@ -116,14 +116,14 @@ hamaaser/
 
 ### Mobile: Authentication (US1)
 
-- [ ] T048 [P] [US1] Create mobile/src/screens/auth/WelcomeScreen.tsx with "Sign Up" and "Login" buttons per registration-login.html
-- [ ] T049 [P] [US1] Create mobile/src/screens/auth/SignUpScreen.tsx with email, password, full name fields and Google OAuth button
-- [ ] T050 [P] [US1] Create mobile/src/screens/auth/LoginScreen.tsx with email, password fields and "Forgot Password" link
-- [ ] T051 [US1] Implement Firebase email/password registration in mobile/src/services/auth.ts with email verification trigger
-- [ ] T052 [US1] Implement Firebase Google OAuth in mobile/src/services/auth.ts using expo-auth-session for native sign-in
-- [ ] T053 [US1] Create Firestore user document on registration in mobile/src/services/auth.ts writing to users collection per data-model.md
-- [ ] T054 [US1] Add auth state listener in mobile/src/stores/authStore.ts to persist login across app restarts
-- [ ] T055 [US1] Implement email verification check in mobile/src/screens/auth/VerifyEmailScreen.tsx with resend button
+- [x] T048 [P] [US1] Create mobile/src/screens/auth/WelcomeScreen.tsx with "Sign Up" and "Login" buttons per registration-login.html
+- [x] T049 [P] [US1] Create mobile/src/screens/auth/SignUpScreen.tsx with email, password, full name fields and Google OAuth button
+- [x] T050 [P] [US1] Create mobile/src/screens/auth/LoginScreen.tsx with email, password fields and "Forgot Password" link
+- [x] T051 [US1] Implement Firebase email/password registration in mobile/src/services/auth.ts with email verification trigger
+- [x] T052 [US1] Implement Firebase Google OAuth in mobile/src/services/auth.ts using expo-auth-session for native sign-in
+- [x] T053 [US1] Create Firestore user document on registration in mobile/src/services/auth.ts writing to users collection per data-model.md
+- [x] T054 [US1] Add auth state listener in mobile/src/stores/authStore.ts to persist login across app restarts
+- [x] T055 [US1] Implement email verification check in mobile/src/screens/auth/VerifyEmailScreen.tsx with resend button
 
 ### Mobile: Story Feed (US1)
 
