@@ -136,12 +136,12 @@ hamaaser/
 
 ### Mobile: Story Detail (US1)
 
-- [ ] T062 [P] [US1] Create mobile/src/screens/feed/StoryDetailScreen.tsx with hero image, full description, photo gallery, progress bar
-- [ ] T063 [US1] Implement Firestore document read in mobile/src/services/storyService.ts: GET /stories/:storyId with denormalized NGO data
-- [ ] T064 [US1] Display donation progress in StoryDetailScreen calculating percentage: (raisedAmount / goalAmount) * 100
-- [ ] T065 [US1] Add scrollable image gallery in StoryDetailScreen using horizontal FlatList for story.images array
-- [ ] T066 [US1] Display NGO information section in StoryDetailScreen with NGO logo, name, verified badge from denormalized fields
-- [ ] T067 [US1] Add "Donate Now" button in StoryDetailScreen navigating to DonationFlowScreen with storyId parameter
+- [x] T062 [P] [US1] Create mobile/src/screens/feed/StoryDetailScreen.tsx with hero image, full description, photo gallery, progress bar
+- [x] T063 [US1] Implement Firestore document read in mobile/src/services/storyService.ts: GET /stories/:storyId with denormalized NGO data
+- [x] T064 [US1] Display donation progress in StoryDetailScreen calculating percentage: (raisedAmount / goalAmount) * 100
+- [x] T065 [US1] Add scrollable image gallery in StoryDetailScreen using horizontal FlatList for story.images array
+- [x] T066 [US1] Display NGO information section in StoryDetailScreen with NGO logo, name, verified badge from denormalized fields
+- [x] T067 [US1] Add "Donate Now" button in StoryDetailScreen navigating to DonationFlowScreen with storyId parameter
 
 ### Mobile: Donation Flow (US1)
 
