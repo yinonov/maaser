@@ -127,12 +127,12 @@ hamaaser/
 
 ### Mobile: Story Feed (US1)
 
-- [ ] T056 [P] [US1] Create mobile/src/screens/feed/FeedScreen.tsx with FlatList for infinite scroll story feed per home.html
-- [ ] T057 [P] [US1] Create mobile/src/components/StoryCard.tsx with thumbnail, title, short description, progress bar, donate button
-- [ ] T058 [US1] Implement Firestore query in mobile/src/services/storyService.ts: GET active stories ordered by publishedAt desc with limit 10
-- [ ] T059 [US1] Add pagination to FeedScreen in mobile/src/screens/feed/FeedScreen.tsx using onEndReached with offset incrementing
-- [ ] T060 [US1] Implement pull-to-refresh in FeedScreen in mobile/src/screens/feed/FeedScreen.tsx to reload latest stories
-- [ ] T061 [US1] Add story detail navigation on StoryCard tap in mobile/src/components/StoryCard.tsx routing to StoryDetailScreen
+- [x] T056 [P] [US1] Create mobile/src/screens/feed/FeedScreen.tsx with FlatList for infinite scroll story feed per home.html
+- [x] T057 [P] [US1] Create mobile/src/components/StoryCard.tsx with thumbnail, title, short description, progress bar, donate button
+- [x] T058 [US1] Implement Firestore query in mobile/src/services/storyService.ts: GET active stories ordered by publishedAt desc with limit 10
+- [x] T059 [US1] Add pagination to FeedScreen in mobile/src/screens/feed/FeedScreen.tsx using onEndReached with offset incrementing
+- [x] T060 [US1] Implement pull-to-refresh in FeedScreen in mobile/src/screens/feed/FeedScreen.tsx to reload latest stories
+- [x] T061 [US1] Add story detail navigation on StoryCard tap in mobile/src/components/StoryCard.tsx routing to StoryDetailScreen
 
 ### Mobile: Story Detail (US1)
 

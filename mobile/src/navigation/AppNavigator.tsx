@@ -12,8 +12,10 @@ import SignUpScreen from '../screens/auth/SignUpScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import VerifyEmailScreen from '../screens/auth/VerifyEmailScreen';
 
+// Feed screens
+import FeedScreen from '../screens/feed/FeedScreen';
+
 // Placeholder screens - will be implemented in Phase 3
-const FeedScreen = () => null;
 const StoryDetailScreen = () => null;
 const DonationFlowScreen = () => null;
 const SuccessScreen = () => null;
