@@ -16,9 +16,11 @@ import VerifyEmailScreen from '../screens/auth/VerifyEmailScreen';
 import FeedScreen from '../screens/feed/FeedScreen';
 import StoryDetailScreen from '../screens/feed/StoryDetailScreen';
 
+// Donation screens
+import DonationFlowScreen from '../screens/donation/DonationFlowScreen';
+import SuccessScreen from '../screens/donation/SuccessScreen';
+
 // Placeholder screens - will be implemented in Phase 3
-const DonationFlowScreen = () => null;
-const SuccessScreen = () => null;
 const DonationsListScreen = () => null;
 const ProfileScreen = () => null;
 

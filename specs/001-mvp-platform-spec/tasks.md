@@ -145,22 +145,22 @@ hamaaser/
 
 ### Mobile: Donation Flow (US1)
 
-- [ ] T068 [P] [US1] Create mobile/src/screens/donation/DonationFlowScreen.tsx with amount selection, message input per dontation.html
-- [ ] T069 [US1] Add preset amount buttons in DonationFlowScreen (18₪, 50₪, 100₪) with active state styling
-- [ ] T070 [US1] Add custom amount input in DonationFlowScreen with numeric keyboard and validation (min 5₪)
-- [ ] T071 [US1] Display fee breakdown in DonationFlowScreen: "98₪ to NGO + 2₪ platform fee" with 2% calculation
-- [ ] T072 [US1] Add optional message textarea in DonationFlowScreen (max 500 chars) and anonymous toggle checkbox
-- [ ] T073 [US1] Implement Stripe payment intent creation in mobile/src/services/paymentService.ts calling Cloud Function createPaymentIntent
-- [ ] T074 [US1] Integrate @stripe/stripe-react-native in DonationFlowScreen opening Stripe Checkout webview with clientSecret
-- [ ] T075 [US1] Handle payment success callback in DonationFlowScreen navigating to SuccessScreen with donationId
-- [ ] T076 [US1] Handle payment failure in DonationFlowScreen showing error alert with retry option
+- [x] T068 [P] [US1] Create mobile/src/screens/donation/DonationFlowScreen.tsx with amount selection, message input per dontation.html
+- [x] T069 [US1] Add preset amount buttons in DonationFlowScreen (18₪, 50₪, 100₪) with active state styling
+- [x] T070 [US1] Add custom amount input in DonationFlowScreen with numeric keyboard and validation (min 5₪)
+- [x] T071 [US1] Display fee breakdown in DonationFlowScreen: "98₪ to NGO + 2₪ platform fee" with 2% calculation
+- [x] T072 [US1] Add optional message textarea in DonationFlowScreen (max 500 chars) and anonymous toggle checkbox
+- [x] T073 [US1] Implement Stripe payment intent creation in mobile/src/services/paymentService.ts calling Cloud Function createPaymentIntent
+- [x] T074 [US1] Integrate @stripe/stripe-react-native in DonationFlowScreen opening Stripe Checkout webview with clientSecret
+- [x] T075 [US1] Handle payment success callback in DonationFlowScreen navigating to SuccessScreen with donationId
+- [x] T076 [US1] Handle payment failure in DonationFlowScreen showing error alert with retry option
 
 ### Mobile: Donation Success (US1)
 
-- [ ] T077 [P] [US1] Create mobile/src/screens/donation/SuccessScreen.tsx with checkmark animation, donation summary, "View Receipt" button
-- [ ] T078 [US1] Display donation details in SuccessScreen: amount, story title, NGO name, receipt number from donation document
-- [ ] T079 [US1] Add "Back to Stories" button in SuccessScreen navigating to FeedScreen with feed refresh
-- [ ] T080 [US1] Add "Share" button in SuccessScreen (placeholder for future - out of scope per spec.md)
+- [x] T077 [P] [US1] Create mobile/src/screens/donation/SuccessScreen.tsx with checkmark animation, donation summary, "View Receipt" button
+- [x] T078 [US1] Display donation details in SuccessScreen: amount, story title, NGO name, receipt number from donation document
+- [x] T079 [US1] Add "Back to Stories" button in SuccessScreen navigating to FeedScreen with feed refresh
+- [x] T080 [US1] Add "Share" button in SuccessScreen (placeholder for future - out of scope per spec.md)
 
 ### Cloud Functions: Payment API (US1)
 
