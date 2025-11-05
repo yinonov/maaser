@@ -191,8 +191,8 @@ hamaaser/
 
 ### Mobile: Testing US1 (Optional - can defer to Phase 7)
 
-- [ ] T102 [P] [US1] Write integration test in mobile/**tests**/auth.test.ts: signup → login → verify email flow
-- [ ] T103 [P] [US1] Write integration test in mobile/**tests**/donation.test.ts: browse stories → select story → donate → receive receipt
+- [ ] T102 [P] [US1] Write integration test in mobile/**tests**/auth.test.ts: signup → login → verify email flow (OPTIONAL - deferred per constitution 30% coverage)
+- [ ] T103 [P] [US1] Write integration test in mobile/**tests**/donation.test.ts: browse stories → select story → donate → receive receipt (OPTIONAL - deferred per constitution 30% coverage)
 
 **Checkpoint**: USER STORY 1 COMPLETE - MVP is now functional! Can test end-to-end: signup → browse → donate → receipt
 
