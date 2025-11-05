@@ -414,8 +414,8 @@ hamaaser/
 
 ### Dashboard Polish
 
-- [ ] T216 [P] Add loading skeletons in dashboard for table loading states
-- [ ] T217 [P] Add toast notifications in dashboard using react-hot-toast for user feedback on actions
+- [x] T216 [P] Add loading skeletons in dashboard for table loading states
+- [x] T217 [P] Add toast notifications in dashboard using react-hot-toast for user feedback on actions
 - [ ] T218 [P] Implement dark mode in dashboard matching mobile design system with Tailwind dark: classes
 - [ ] T219 [P] Add dashboard analytics using Google Analytics 4 for NGO admin behavior tracking
 - [ ] T220 Add Sentry error tracking in dashboard for production error monitoring
@@ -423,8 +423,8 @@ hamaaser/
 
 ### Security Hardening
 
-- [ ] T222 [P] Review and tighten Firestore security rules in firebase/firestore.rules ensuring role-based access control
-- [ ] T223 [P] Review and tighten Storage security rules in firebase/storage.rules preventing unauthorized image access
+- [x] T222 [P] Review and tighten Firestore security rules in firebase/firestore.rules ensuring role-based access control
+- [x] T223 [P] Review and tighten Storage security rules in firebase/storage.rules preventing unauthorized image access
 - [ ] T224 [P] Add rate limiting to Cloud Functions in functions/src/utils/rateLimiter.ts preventing abuse (10 requests/min per IP)
 - [ ] T225 [P] Add input sanitization in Cloud Functions for all user-provided text fields preventing XSS
 - [ ] T226 [P] Implement HTTPS-only enforcement in firebase.json and Expo app.json

@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import toast from 'react-hot-toast';
 import StoryForm from '@/components/StoryForm';
 import getApp from '@/lib/firebase-client';
 
@@ -32,7 +33,7 @@ export default function NewStoryPage() {
       const response = result.data as any;
 
       if (response.success) {
-        alert('Story submitted successfully! It will be reviewed by our team.');
+        toast.success('Story submitted successfully! It will be reviewed by our team.');
         router.push('/stories');
       } else {
         throw new Error('Failed to create story');
