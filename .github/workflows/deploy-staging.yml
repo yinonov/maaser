@@ -1,0 +1,78 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install root dependencies
+        run: npm ci
+      
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+      
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+      
+      - name: Setup environment configuration
+        run: |
+          ./scripts/deploy/setup-environments.sh || true
+      
+      - name: Deploy Functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          CI: true
+        run: |
+          ./scripts/deploy/deploy-functions.sh staging --force
+      
+      - name: Deploy Dashboard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          CI: true
+        run: |
+          ./scripts/deploy/deploy-dashboard.sh staging
+      
+      - name: Build Mobile Apps
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          CI: true
+        run: |
+          ./scripts/deploy/deploy-mobile.sh staging --platform all
+        continue-on-error: true
+      
+      - name: Send notification
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"✅ Staging deployment completed successfully"}' \
+              $SLACK_WEBHOOK_URL || true
+          else
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"❌ Staging deployment failed"}' \
+              $SLACK_WEBHOOK_URL || true
+          fi

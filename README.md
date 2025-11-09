@@ -195,10 +195,50 @@ npm run functions           # Start functions emulator
 npm run dashboard:build     # Build dashboard for production
 npm run functions:deploy    # Deploy functions to Firebase
 
+# Deployment (requires setup)
+npm run deploy:dev          # Deploy all platforms to development
+npm run deploy:staging      # Deploy all platforms to staging
+npm run deploy:prod         # Deploy all platforms to production
+npm run deploy:functions    # Deploy only Firebase Functions
+npm run deploy:dashboard    # Deploy only Next.js dashboard
+npm run deploy:mobile       # Deploy only mobile apps
+
+# Rollback
+npm run rollback:staging    # Rollback staging deployment
+npm run rollback:prod       # Rollback production deployment
+
+# Setup
+npm run setup:environments  # Create environment configuration files
+npm run check:secrets       # Validate secrets configuration
+
 # Maintenance
 npm run install:all         # Install all dependencies
 npm run lint                # Lint all packages
 ```
+
+## 🚀 Deployment
+
+### Quick Deploy
+
+```bash
+# First-time setup
+npm run setup:environments
+npm run check:secrets dev
+
+# Deploy to staging
+npm run deploy:staging
+
+# Deploy to production (requires manual approval in GitHub Actions)
+npm run deploy:prod
+```
+
+### CI/CD Pipelines
+
+- **Pull Requests**: Automated tests and linting
+- **Main Branch**: Auto-deploy to staging
+- **Production**: Manual deployment via GitHub Actions
+
+See [deployment quickstart](specs/002-deployment-infrastructure/quickstart.md) for detailed setup instructions.
 
 ## 🤝 Contributing
 

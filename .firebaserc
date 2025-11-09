@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "hamaaser-dev",
+    "dev": "hamaaser-dev",
+    "staging": "hamaaser-staging",
+    "prod": "hamaaser-prod"
+  }
+}

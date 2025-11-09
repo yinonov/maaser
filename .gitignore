@@ -54,3 +54,14 @@ ui-debug.log
 # Temporary files
 *.tmp
 .cache/
+
+# Deployment
+.deployments/
+.vercel/
+*.pem
+*.p12
+*.mobileprovision
+service-account-*.json
+google-service-account.json
+config/environments/*.json
+!config/environments/.env.example
