@@ -6,18 +6,26 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "channel": "development",
       "ios": {
-        "simulator": true
+        "simulator": true,
+        "bundleIdentifier": "org.hamaaser.app.dev"
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "applicationId": "org.hamaaser.app.dev"
+      },
+      "env": {
+        "APP_ENV": "development"
       }
     },
     "staging": {
       "distribution": "internal",
+      "channel": "staging",
       "ios": {
         "simulator": false,
-        "bundleIdentifier": "org.hamaaser.app.staging"
+        "bundleIdentifier": "org.hamaaser.app.staging",
+        "buildConfiguration": "Release"
       },
       "android": {
         "buildType": "apk",
@@ -29,9 +37,11 @@
     },
     "production": {
       "distribution": "store",
+      "channel": "production",
       "ios": {
         "simulator": false,
-        "bundleIdentifier": "org.hamaaser.app"
+        "bundleIdentifier": "org.hamaaser.app",
+        "buildConfiguration": "Release"
       },
       "android": {
         "buildType": "aab",
@@ -43,6 +53,16 @@
     }
   },
   "submit": {
+    "staging": {
+      "ios": {
+        "appleId": "your-apple-id@example.com",
+        "ascAppId": "REPLACE_WITH_APP_STORE_CONNECT_APP_ID",
+        "appleTeamId": "REPLACE_WITH_TEAM_ID"
+      },
+      "android": {
+        "track": "internal"
+      }
+    },
     "production": {
       "ios": {
         "appleId": "your-apple-id@example.com",
