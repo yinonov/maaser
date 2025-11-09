@@ -20,7 +20,17 @@
     "functions:build": "cd functions && npm run build",
     "install:all": "npm install && cd mobile && npm install && cd ../dashboard && npm install && cd ../functions && npm install",
     "lint": "cd mobile && npm run lint && cd ../dashboard && npm run lint",
-    "test": "echo \"Run tests from individual packages\""
+    "test": "echo \"Run tests from individual packages\"",
+    "deploy:dev": "./scripts/deploy/deploy-all.sh dev",
+    "deploy:staging": "./scripts/deploy/deploy-all.sh staging",
+    "deploy:prod": "./scripts/deploy/deploy-all.sh prod",
+    "deploy:functions": "./scripts/deploy/deploy-functions.sh",
+    "deploy:dashboard": "./scripts/deploy/deploy-dashboard.sh",
+    "deploy:mobile": "./scripts/deploy/deploy-mobile.sh",
+    "rollback:staging": "./scripts/deploy/rollback.sh staging",
+    "rollback:prod": "./scripts/deploy/rollback.sh prod",
+    "setup:environments": "./scripts/deploy/setup-environments.sh",
+    "check:secrets": "./scripts/deploy/check-secrets.sh"
   },
   "description": "HaMaaser MVP - Digital Tithing Platform (Monorepo)",
   "author": "HaMaaser Team",
