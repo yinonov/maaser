@@ -1,0 +1,585 @@
+# GitHub Actions CI/CD Pipeline Contracts
+#
+# This file defines the complete CI/CD pipeline structure for the HaMaaser platform.
+# Copy individual workflow files to .github/workflows/ in repository root.
+
+# ============================================================================
+# WORKFLOW 1: CI Tests (ci-tests.yml)
+# ============================================================================
+# Trigger: Push to any branch, Pull Request
+# Purpose: Run linting, type checking, and unit tests
+# Requirement: Must pass before merge to main
+
+name: CI Tests
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-typecheck:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install root dependencies
+        run: npm ci
+      
+      - name: Lint mobile
+        run: cd mobile && npm ci && npm run lint
+      
+      - name: Lint dashboard
+        run: cd dashboard && npm ci && npm run lint
+      
+      - name: Lint functions
+        run: cd functions && npm ci && npm run lint
+      
+      - name: TypeScript check (mobile)
+        run: cd mobile && npx tsc --noEmit
+      
+      - name: TypeScript check (dashboard)
+        run: cd dashboard && npx tsc --noEmit
+      
+      - name: TypeScript check (functions)
+        run: cd functions && npx tsc --noEmit
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Test mobile
+        run: cd mobile && npm ci && npm test -- --coverage
+      
+      - name: Test dashboard
+        run: cd dashboard && npm ci && npm test -- --coverage
+      
+      - name: Test functions
+        run: cd functions && npm ci && npm test -- --coverage
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./mobile/coverage/lcov.info,./dashboard/coverage/lcov.info,./functions/coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+  firebase-emulator-tests:
+    name: Firebase Emulator Integration Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install Java (for Firebase Emulator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Install dependencies
+        run: cd functions && npm ci
+      
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: Start Firebase Emulators
+        run: firebase emulators:start --only functions,firestore &
+        working-directory: functions
+      
+      - name: Wait for emulators
+        run: sleep 10
+      
+      - name: Run integration tests
+        run: npm run test:integration
+        working-directory: functions
+        env:
+          FIRESTORE_EMULATOR_HOST: localhost:8080
+          FIREBASE_AUTH_EMULATOR_HOST: localhost:9099
+
+# ============================================================================
+# WORKFLOW 2: Deploy to Staging (deploy-staging.yml)
+# ============================================================================
+# Trigger: Push to main branch (after CI tests pass)
+# Purpose: Automatically deploy to staging environment
+# Requirement: CI tests must pass first
+
+---
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-functions:
+    name: Deploy Functions to Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: []  # Can run in parallel with other deploys
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: cd functions && npm ci
+      
+      - name: Run tests
+        run: cd functions && npm test
+      
+      - name: Build functions
+        run: cd functions && npm run build
+      
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: Deploy to Firebase Staging
+        run: |
+          firebase use staging
+          firebase deploy --only functions --force
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      
+      - name: Verify deployment
+        run: |
+          firebase functions:log --limit 5
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+  deploy-dashboard:
+    name: Deploy Dashboard to Vercel Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: []  # Can run in parallel
+    outputs:
+      deployment-url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: cd dashboard && npm ci
+      
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      
+      - name: Deploy to Vercel
+        id: deploy
+        run: |
+          cd dashboard
+          DEPLOYMENT_URL=$(vercel deploy --token=${{ secrets.VERCEL_TOKEN }} | tail -1)
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      
+      - name: Comment PR with preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ Dashboard deployed to staging: ${{ steps.deploy.outputs.url }}`
+            })
+
+  deploy-mobile:
+    name: Build Mobile Apps (EAS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    needs: []  # Can run in parallel
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: Install dependencies
+        run: cd mobile && npm ci
+      
+      - name: Bump build version
+        run: |
+          cd mobile
+          node -e "
+            const fs = require('fs');
+            const app = JSON.parse(fs.readFileSync('app.json', 'utf8'));
+            app.expo.ios.buildNumber = String(Number(app.expo.ios.buildNumber) + 1);
+            app.expo.android.versionCode = Number(app.expo.android.versionCode) + 1;
+            fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
+            console.log('Build version:', app.expo.ios.buildNumber);
+          "
+      
+      - name: Commit version bump
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add mobile/app.json
+          git commit -m "chore: bump mobile build version [skip ci]" || echo "No changes to commit"
+          git push || echo "No changes to push"
+      
+      - name: Build on EAS
+        run: |
+          cd mobile
+          eas build --platform all --profile staging --non-interactive --no-wait
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: Post build URLs
+        run: echo "✅ Mobile builds started. Check https://expo.dev/accounts/hamaaser/projects/hamaaser/builds"
+
+  e2e-tests:
+    name: E2E Tests (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [deploy-dashboard]  # Wait for dashboard deployment
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      
+      - name: Run E2E tests
+        run: npm run test:e2e
+        env:
+          STAGING_DASHBOARD_URL: ${{ needs.deploy-dashboard.outputs.deployment-url }}
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: playwright-report/
+          retention-days: 30
+
+  notify-slack:
+    name: Notify Slack
+    runs-on: ubuntu-latest
+    needs: [deploy-functions, deploy-dashboard, deploy-mobile, e2e-tests]
+    if: always()
+    
+    steps:
+      - name: Send success notification
+        if: needs.deploy-functions.result == 'success' && needs.deploy-dashboard.result == 'success'
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "✅ Staging Deployment Successful",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Staging Deployment Complete*\n\nCommit: `${{ github.sha }}`\nBranch: `${{ github.ref_name }}`\nDashboard: ${{ needs.deploy-dashboard.outputs.deployment-url }}"
+                  }
+                }
+              ]
+            }
+      
+      - name: Send failure notification
+        if: needs.deploy-functions.result == 'failure' || needs.deploy-dashboard.result == 'failure'
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "❌ Staging Deployment Failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Staging Deployment Failed*\n\nCommit: `${{ github.sha }}`\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  }
+                }
+              ]
+            }
+
+# ============================================================================
+# WORKFLOW 3: Deploy to Production (deploy-production.yml)
+# ============================================================================
+# Trigger: Manual workflow dispatch with approval
+# Purpose: Deploy to production environment
+# Requirement: Manual approval gate
+
+---
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  approval:
+    name: Manual Approval Gate
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://dashboard.hamaaser.org
+    
+    steps:
+      - name: Approval checkpoint
+        run: echo "✅ Production deployment approved for version ${{ inputs.version }}"
+
+  validate-secrets:
+    name: Validate Production Secrets
+    runs-on: ubuntu-latest
+    needs: [approval]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check required secrets
+        run: |
+          echo "Validating production secrets..."
+          # Check GitHub Secrets
+          test -n "${{ secrets.EXPO_TOKEN }}" || (echo "Missing EXPO_TOKEN" && exit 1)
+          test -n "${{ secrets.VERCEL_TOKEN }}" || (echo "Missing VERCEL_TOKEN" && exit 1)
+          test -n "${{ secrets.FIREBASE_TOKEN }}" || (echo "Missing FIREBASE_TOKEN" && exit 1)
+          echo "✅ All secrets validated"
+
+  deploy-functions:
+    name: Deploy Functions to Production
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [validate-secrets]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: cd functions && npm ci
+      
+      - name: Run tests
+        run: cd functions && npm test
+      
+      - name: Build functions
+        run: cd functions && npm run build
+      
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: Deploy to Firebase Production
+        run: |
+          firebase use prod
+          firebase deploy --only functions --force
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      
+      - name: Run smoke tests
+        run: |
+          # Test critical function endpoints
+          curl -f https://us-central1-hamaaser-prod.cloudfunctions.net/healthCheck || exit 1
+
+  deploy-dashboard:
+    name: Deploy Dashboard to Vercel Production
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [validate-secrets]
+    outputs:
+      deployment-url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: cd dashboard && npm ci
+      
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      
+      - name: Deploy to Vercel Production
+        id: deploy
+        run: |
+          cd dashboard
+          vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+          echo "url=https://dashboard.hamaaser.org" >> $GITHUB_OUTPUT
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  submit-mobile:
+    name: Submit Mobile Apps to Stores
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [validate-secrets]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: Build and submit to App Store
+        run: |
+          cd mobile
+          eas build --platform ios --profile production --non-interactive
+          eas submit --platform ios --latest --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+      
+      - name: Build and submit to Play Store
+        run: |
+          cd mobile
+          eas build --platform android --profile production --non-interactive
+          eas submit --platform android --latest --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [deploy-functions, deploy-dashboard, submit-mobile]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ inputs.version }}
+          release_name: Release ${{ inputs.version }}
+          body: |
+            ## Production Deployment ${{ inputs.version }}
+            
+            **Deployed Components:**
+            - ✅ Firebase Functions
+            - ✅ Dashboard (Vercel)
+            - ✅ iOS App (App Store submission)
+            - ✅ Android App (Play Store submission)
+            
+            **Dashboard URL:** https://dashboard.hamaaser.org
+            
+            **Commit:** ${{ github.sha }}
+          draft: false
+          prerelease: false
+
+  notify-slack:
+    name: Notify Team
+    runs-on: ubuntu-latest
+    needs: [deploy-functions, deploy-dashboard, submit-mobile, create-release]
+    if: always()
+    
+    steps:
+      - name: Send notification
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "🚀 Production Deployment ${{ inputs.version }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Production Deployment Complete*\n\nVersion: `${{ inputs.version }}`\nCommit: `${{ github.sha }}`\nDashboard: https://dashboard.hamaaser.org\n\n⏳ Mobile apps submitted to stores (review pending)"
+                  }
+                }
+              ]
+            }
